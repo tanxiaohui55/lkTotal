@@ -213,7 +213,6 @@ export class FindProductionScheduleComponent extends AppComponentBase implements
       newArray.productComplete = orders['amount'] - a - b - c - d - e;
       newArray.unfinished = a + b + c + d + e;
       newArray.total = orders['amount'];
-
       if (type == 'lk02') {
         this.carriLK02Datas.push(newArray);
         this.OnPropChanged('lk02');
