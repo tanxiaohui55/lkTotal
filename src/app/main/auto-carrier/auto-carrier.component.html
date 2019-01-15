@@ -1,0 +1,102 @@
+<div [@routerTransition]>
+    <div class="m-subheader ">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto col-sm-6">
+                <h3 class="m-subheader__title m-subheader__title--separator">
+                    <span>{{l("RuleSetting")}}</span>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+                <div class="m-form m-form--label-align-right">
+                    <div class="row m--margin-bottom-10">
+                        <div class="col-xl-6">
+                            <div class="form-group">
+                                <company-combo (selectedCompanyChange)="selectedCompanyHandler($event)"></company-combo>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 text-right">
+                            <button name="RefreshButton" class="btn btn-metal" (click)="selectedCompanyHandler(null)"><i class="la la-refresh"></i>
+                                {{l('Refresh')}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--begin::Portlet-->
+        <div class="m-portlet m-portlet--mobile" m-portlet="true" *ngFor="let rule of selectedCarrierRules">
+            <!--begin::Form-->
+            <form class="m-form m-form--fit m-form--label-align-right">
+                <div class="m-portlet__body">
+                    <div class="form-group  m-form__group row">
+                        <div class="ribbon ribbon-color-primary"><span>{{rule.companyCode}} -{{rule.province}} ：</span>
+                            <i *ngIf="rule.isPriority" class="la la-check"></i>
+                            <i *ngIf="!rule.isPriority" class="la la-balance-scale"></i>
+                        </div>
+                        <div class="col-md-5">
+                            <carrier-combo [(selectedCarrier)]="rule.carrierCode"></carrier-combo>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="m-radio-inline">
+                                <label class="m-checkbox m-checkbox--state-info">
+                                    <input type="checkbox" [(ngModel)]="rule.isPriority" name='priorityCheck'> 省份匹配优先
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-4  clearfix text-right">
+                            <button class="btn btn-sm btn-primary" (click)="addLine(rule)" [hidden]="rule.isPriority">
+                                <i class="la la-plus"></i>
+                                {{l('Add')}}
+                            </button>
+                            <button class="btn btn-sm btn-info" (click)="save(rule)">
+                                <i class="la la-save"></i>
+                                {{l('Save')}}</button>
+                        </div>
+                    </div>
+                    <div class="form-group  m-form__group row" [hidden]="rule.isPriority" *ngFor="let weightRule of rule.weightRules;let i=index">
+                        <div class="col-md-5">
+                            <no-ui-slider [(selectedWeight)]="rule.weightRules[i]"></no-ui-slider>
+                        </div>
+                        <div class="col-md-3">
+                            <carrier-combo [(selectedCarrier)]="weightRule.carrierCode"></carrier-combo>
+                        </div>
+                        <div class="col-md-4 clearfix text-right">
+                            <!-- <button class="btn btn-sm btn-info m--margin-top-5">
+                                <i class="la la-save"></i>
+                                {{l('Save')}}
+                            </button> -->
+                            <button class="btn btn-sm btn-primary" (click)="deleteLine(rule,weightRule)">
+                                <i class="la la-trash-o"></i>
+                                {{l('Delete')}}
+                            </button>
+                            <!-- <button class="btn btn-sm btn-primary m--margin-top-5">
+                                <i class="la la-plus"></i>
+                            </button> -->
+                        </div>
+                    </div>
+                    <div class="row margin-bottom-10" style="margin-left:15px">
+                        <div class="col-sm-12">
+                            <span class="clickable-item text-muted" *ngIf="rule.isPriority" (click)="rule.isPriority=!rule.isPriority"><i
+                                    class="fa fa-angle-down"></i> {{l("ShowWeightRuleList")}}</span>
+                            <span class="clickable-item text-muted" *ngIf="!rule.isPriority" (click)="rule.isPriority=!rule.isPriority"><i
+                                    class="fa fa-angle-up"></i> {{l("HideWeightRuleList")}}</span>
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-4">
+                        <div class="btn btn btn-sm btn-brand m-btn m-btn--icon m-btn--pill m-btn--wide">
+                            <span>
+                                <i class="la la-plus"></i>
+                                <span>{{l('Add')}}</span>
+                            </span>
+                        </div>
+                    </div> -->
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+    </div>
+</div>

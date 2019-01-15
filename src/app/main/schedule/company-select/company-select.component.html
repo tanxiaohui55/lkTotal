@@ -1,0 +1,4 @@
+<select #CompanyCombobox class="form-control" [(ngModel)]="selectedCompany" (ngModelChange)="selectedCompanyChange.emit($event)" [attr.data-live-search]="true">
+            <!-- <option value="">{{l('FilterByCompany')}}</option> -->
+            <option *ngFor="let company of companies" [value]="company.name">{{company.name}}</option>
+</select>

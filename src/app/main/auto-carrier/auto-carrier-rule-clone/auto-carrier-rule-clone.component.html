@@ -1,0 +1,44 @@
+<div [@routerTransition]>
+    <div class="m-subheader ">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto col-sm-6">
+                <h3 class="m-subheader__title m-subheader__title--separator">
+                    <span>{{l("RuleClone")}}</span>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+                <div class="col-lg-12 alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    {{l("Tips")}}:<br />
+                    {{l("RuleCloneComponents_Info")}}<br />
+                </div>
+                <div class="m-form m-form--label-align-right">
+                    <div class="row m--margin-bottom-10">
+                        <div class="col-xl-4">
+                            <div class="form-group">
+                                <company-combo [(selectedCompany)]="cloneInput.sourceCode"></company-combo>
+                            </div>
+                        </div>
+                        <div class="col-xl-1">
+                            <div class="form-group">
+                                <i class="fa fa-arrow-right" style="font-size: 2.5rem;"></i> </div>
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="form-group">
+                                <company-combo [(selectedCompany)]="cloneInput.destinationCode"></company-combo>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 text-right">
+                            <button name="RefreshButton" class="btn btn-metal" (click)="cloneRule()"><i class="la la-copyright"></i>
+                                {{l('Clone')}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

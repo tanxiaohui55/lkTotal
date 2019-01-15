@@ -1,0 +1,243 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1"> <meta name="description" content="ASP.NET Zero is a base solution to create new web applications with a modern UI and solid architecture. It saves your time by providing pre-built and working pages and a strong infrastructure."> <meta name="keywords" content="asp.net mvc, angular, starter kit, web template, application framework, membership management, admin panel, multitenant, asp.net core"> <meta name="author" content="Volosoft Computer and Technology"> <meta name="Revisit-After" content="7 Days"/> <meta itemprop="name" content="ASP.NET Zero Web Site"/> <meta itemprop="image" content="/Images/Logos/logo.png"/> <meta property="og:type" content="website"/> <meta property="og:url" content="https://www.facebook.com/aspnetzero"/> <meta property="og:site_name" content="AspNet Zero "/> <meta property="og:site_name" content="AspNet Zero "/> <meta property="og:phone_number" content="444-999-0"> <meta property='og:title' content='AspNet Zero | a base solution to create new web applications'/> <meta property='og:description' content='ASP.NET Zero is a base solution to create new web applications with a modern UI and solid architecture. It saves your time by providing pre-built and working pages and a strong infrastructure.'/> <meta property='og:keywords' content='asp.net mvc, angular, starter kit, web template, application framework, membership management, admin panel, multitenant, asp.net core'/> <meta property="og:image" content="https://www.aspnetzero.com/Images/Logos/logo.png"/> <meta name="DC.title" content="AspNet Zero - a base solution to create new web applications"/> <link rel="icon" href="/favicon.png"> <style>
+        .parallax-bg {
+            background: url(/sugan/img/home/alt1.jpg) 50% 0 no-repeat fixed
+        }
+
+        .parallax {
+            background: rgba(49,56,60,.8);
+            padding: 80px 0 80px 0;
+            color: #e8e8e8
+        }
+
+        .flexslider .slides, .imac-device .slides {
+            margin: 0;
+            padding: 0
+        }
+
+            .flexslider .slides > li, .imac-device .slides > li {
+                display: none;
+                -webkit-backface-visibility: hidden;
+                margin: 0;
+                padding: 0
+            }
+
+            .flexslider .slides img, .imac-device .slides img {
+                width: 100%;
+                display: block
+            }
+
+        .flexslider, .imac-device {
+            margin: 0;
+            background: none;
+            position: relative;
+            zoom: 1
+        }
+
+        .flex-viewport {
+            max-height: 2000px;
+            -webkit-transition: all 1s ease;
+            -moz-transition: all 1s ease;
+            transition: all 1s ease
+        }
+
+        .loading .flex-viewport {
+            max-height: 300px
+        }
+
+        .flexslider .slides, .imac-device .slides {
+            zoom: 1
+        }
+
+            .flexslider .slides .col {
+                width: 20%;
+                float: left;
+                position: relative
+            }
+
+        .carousel li {
+            margin-right: 5px
+        }
+
+        .flex-direction-nav {
+            *height: 0
+        }
+
+            .flex-direction-nav a {
+                width: 26px;
+                height: 42px;
+                padding: 0;
+                margin: -45px 0 0 0;
+                display: block;
+                position: absolute;
+                top: 50%;
+                z-index: 10;
+                cursor: pointer;
+                text-indent: -9999px;
+                opacity: 1;
+                -webkit-transition: all .3s ease;
+                -webkit-transition: all .3s ease-in-out;
+                -moz-transition: all .3s ease-in-out;
+                -o-transition: all .3s ease-in-out;
+                -ms-transition: all .3s ease-in-out;
+                transition: all .3s ease-in-out;
+                text-indent: -9999px
+            }
+
+            .flex-direction-nav .flex-next {
+                background-image: url(/sugan/img/bg_direction_nav_next.png);
+                background-repeat: no-repeat;
+                background-position: center center;
+                right: 40px;
+                opacity: .5;
+                border-radius: 3px 0 0 3px
+            }
+
+            .flex-direction-nav .flex-prev {
+                background-image: url(/sugan/img/bg_direction_nav_prev.png);
+                background-repeat: no-repeat;
+                background-position: center center;
+                left: 40px;
+                opacity: .5;
+                border-radius: 0 3px 3px 0
+            }
+
+                .flex-direction-nav .flex-next:hover, .flex-direction-nav .flex-prev:hover {
+                    opacity: 1
+                }
+
+            .flex-direction-nav .flex-disabled {
+                opacity: .3 !important;
+                filter: alpha(opacity=30);
+                cursor: default
+            }
+
+        .flex-control-nav {
+            width: 100%;
+            position: absolute;
+            bottom: -120px;
+            padding-right: 25px;
+            text-align: right;
+            z-index: 999px
+        }
+
+            .flex-control-nav li {
+                margin: 0 5px;
+                padding: 4px;
+                border: 5px solid rgba(51,51,51,.2);
+                display: inline-block;
+                zoom: 1;
+                *display: inline
+            }
+
+        .flex-control-paging li a {
+            overflow: hidden;
+            width: 7px;
+            height: 7px;
+            display: block;
+            cursor: pointer;
+            text-indent: -9999px;
+            background-color: none
+        }
+
+            .flex-control-paging li a:hover {
+                background-color: rgba(51,51,51,.2)
+            }
+
+            .flex-control-paging li a.flex-active {
+                background: #000;
+                background: rgba(0,0,0,.9);
+                cursor: default
+            }
+
+        .flex-control-thumbs {
+            margin: 5px 0 0;
+            position: static;
+            overflow: hidden
+        }
+
+            .flex-control-thumbs li {
+                width: 25%;
+                float: left;
+                margin: 0
+            }
+
+            .flex-control-thumbs img {
+                width: 100%;
+                display: block;
+                opacity: .7;
+                cursor: pointer
+            }
+
+                .flex-control-thumbs img:hover {
+                    opacity: 1
+                }
+
+            .flex-control-thumbs .flex-active {
+                opacity: 1;
+                cursor: default
+            }
+
+        #flexprimary .flex-control-nav {
+            bottom: -60px
+        }
+
+            #flexprimary .flex-control-nav li {
+                border: 5px solid rgba(255,255,255,.5)
+            }
+
+        #flexprimary .flex-control-paging li a:hover {
+            background: rgba(255,255,255,.8)
+        }
+
+        #flexprimary .flex-control-paging li a.flex-active {
+            background: rgba(255,255,255,.5)
+        }
+
+        .navbar-default {
+            padding-top: 30px !important;
+        }
+
+        .navbar-default {
+            background: none;
+            border: none;
+            padding-top: 60px;
+            padding-bottom: 60px;
+            -webkit-transition: background .8s ease-in-out,padding .8s ease-in-out;
+            -moz-transition: background .8s ease-in-out,padding .8s ease-in-out;
+            transition: background .8s ease-in-out,padding .8s ease-in-out
+        }
+
+            .navbar-default .navbar-nav {
+                padding: 5px 0 5px 0
+            }
+
+                .navbar-default .navbar-nav > li > a {
+                    font-size: 14px;
+                    color: #fff;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    padding: 8px 12px 8px 12px;
+                    border-top: 2px solid transparent
+                }
+    </style> <title>ASP.NET Zero</title> <script type="text/javascript">
+        var abp = abp || {}; abp.appPath = '/';
+    </script> </head> <body> <header> <nav class="navbar navbar-default navbar-fixed-top "> <div class="container nav-above-menu"> <span class="hidden-xs"> <a href="https://twitter.com/aspnetzero" target="_blank"><i class="fa fa-twitter"></i><span></span></a> | <a href="https://github.com/aspnetzero" target="_blank"><i class="fa fa-github"></i><span></span></a> | <a href="mailto:info@aspnetzero.com"><i class="fa fa-envelope-o"></i> <span>info@aspnetzero.com</span></a> </span> </div> <div class="container"> <div class="navbar-header"> <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="/"> <img src="/Images/Logos/logo.png" class="scroller-logo" alt=""/> <img src="/Images/Logos/logo.png" class="default-logo" alt=""/> </a> </div> <div id="navbar" class="navbar-collapse collapse"> <ul class="nav navbar-nav navbar-right"> <li><a class="nav-link-inpage" href="#home" id="GoToHome">Home</a></li> <li><a class="nav-link-inpage" href="#description" id="GoToDescription">Description</a></li> <li><a class="nav-link-inpage" href="#features" id="GoToFeatures">Features</a></li> <li><a class="nav-link-inpage" href="#pricing" id="GoToPricing">Pricing</a></li> <li><a class="nav-link-inpage" href="#contact" id="GoToContact">Contact</a></li> <li><a href="/Faq" class="">FAQ</a></li> <li><a href="/Documents" class="">Documents</a></li> <li><a href="https://forum.aspnetboilerplate.com/viewforum.php?f=5" target="_blank">Forum</a></li> <li><a href="/Account/Login" class="login">Login</a></li> </ul> </div> </div> </nav> </header> <section id="home" class="home-section parallax-bg"> <div class="container"> <div class="row text-center"> <div class="col-md-6 col-md-offset-3 headline"> <h1>BASE SOLUTION FOR YOUR NEXT WEB APPLICATION</h1> </div> <div class="col-md-10 col-md-offset-1"> <div class="slideform-wrapper"> <div id="flexprimary" class="home-slider"> <div class="flexslider"> <ul id="HomeSlides" class="slides"> <li> <img src="/Images/Home/Slider02/tenant-dahsboard.png" class="img-responsive" alt=""/> <div class="slide-description">Base solution for your web application built with modern tools and best practices!</div> </li> <li> <img src="/Images/Home/Slider02/create-user.png" class="img-responsive" alt=""/> <div class="slide-description">Advanced user, role and permission management.</div> </li> <li> <img src="/Images/Home/Slider02/tenants.png" class="img-responsive" alt=""/> <div class="slide-description">Built-in multi-tenancy; tenant, edition, feature, subscription and payment management.</div> </li> <li> <img src="/Images/Home/Slider02/localization.png" class="img-responsive" alt=""/> <div class="slide-description">Dynamic UI localization with language management features.</div> </li> <li> <img src="/Images/Home/Slider02/login.png" class="img-responsive" alt=""/> <div class="slide-description">Rich login options; social logins, two factor auth, remember me, email activation, user registration...</div> </li> <li> <img src="/Images/Home/Slider02/audit-logs.png" class="img-responsive" alt=""/> <div class="slide-description">Automatic audit logs to track all user interactions.</div> </li> <li> <img src="/Images/Home/Slider02/top-menu.png" class="img-responsive" alt=""/> <div class="slide-description">Personalize the colors/positions of layout, menu, header and footer of the application.</div> </li> <li> <img src="/Images/Home/Slider02/chat.png" class="img-responsive" alt=""/> <div class="slide-description">Real time chat, notifications, security options and much more...</div> </li> </ul> </div> </div> <div id="CreateDemoFormContainer" class="register-form landing-create-demo-form"> <div class="register-head"> <h4>Create a demo <span></span></h4> </div> <div class="register-containt"> <form id="CreateDemoForm" class="form-horizontal" action="/Demo/CreateDemo" method="post"> <input type="hidden" name="Referrer" value=""/> <input type="hidden" name="ClientId" value=""/> <div class="form-group"> <div class="col-lg-12"> <label>Subdomain</label> <div> <span>http://</span> <input id="DemoSubdomainInput" name="DemoName" type="text" class="form-control input-lg form-block" maxlength="48"> <div>.demo.aspnetzero.com</div> <div class="hint">subdomain name should start with a letter and continue with letter, underscore, dash or digits (2 chars or more).</div> </div> </div> </div> <div class="form-group"> <div class="col-lg-12"> <label>Email <span class="label-additional-info"> (optional)</span></label> <input type="email" name="EmailAddress" class="form-control input-lg form-block" placeholder="demo@aspnetzero.com"> <div class="hint">Enter your actual e-mail address if you want to test mailing functionalities like forgot password and email activation.</div> </div> </div> <div class="form-group"> <div class="col-lg-12"> <button type="submit" class="btn btn-primary" style="background-color: #ff6628; border-color: #ff6628;">CREATE MY DEMO</button> <div id="CreatingDemoText" style="display: none;"> Please wait, your demo account is being created... <i class="fa fa-spin fa-spinner"></i> </div> </div> <div class="col-lg-12" style="margin-top: 5px;"> <a href="#" class="js-modal-btn" data-video-id="CM-5bNf1G4k"><i class="fa fa-youtube-play"></i><span>watch a quick demo</span></a> </div> </div> </form> </div> </div> </div> </div> </div> </div> </section> <div id="wrapper"> <div id="intro" class="dark-section"> <div class="container"> <div class="row text-center"> <div class="col-md-10 col-md-offset-1"> <h3 class="headtitle"> <b>6</b> in <b>1</b> </h3> </div> </div> <div class="row" style="margin-left: 0; margin-right: 0; margin-bottom: 20px;"> <div class="col-md-12" style="background-color: #68217a; font-size: 20px; text-align: center; padding: 10px; /*! margin: 40px; */border-bottom: 3px solid #b700db;"> Now Includes a XAMARIN mobile application! </div> </div> <div class="row x-in-on-intro"> <div class="col-md-6 app-item app-number-one"> <h4>#1 ASP.NET CORE + ANGULAR 6.x</h4> <div class="image-wrapper"> <img class="img img-responsive" src="/Images/Home/Versions/aspnet-core-angular-6.png" width="768" height="454"/> </div> <p>ASP.NET Core 2.x and ANGULAR 6.x based Single Page Application (SPA) solution for your web application.</p> </div> <div class="col-md-6 app-item app-number-two"> <h4>#2 ASP.NET CORE MVC</h4> <div class="image-wrapper"> <img class="img img-responsive" src="/Images/Home/Versions/aspnet-core-mvc.png" width="768" height="454"/> </div> <p>ASP.NET Core 2.x and jQuery based MVC solution for your web application.</p> </div> </div> <div class="row x-in-on-intro"> <div class="col-md-6 app-item app-number-three"> <h4>#3 ASP.NET MVC 5.x + ANGULARJS 1.x</h4> <div class="image-wrapper"> <img class="img img-responsive" src="/Images/Home/Versions/aspnet-mvc-angular-1.png" width="768" height="454"/> </div> <p>ASP.NET MVC 5.x, ASP.NET Web API and Angularjs 1.x based Single-Page Application (SPA) solution for your web application.</p> </div> <div class="col-md-6 app-item app-number-four"> <h4>#4 ASP.NET MVC 5.x</h4> <div class="image-wrapper"> <img class="img img-responsive" src="/Images/Home/Versions/aspnet-mvc5.png" width="768" height="454"/> </div> <p>ASP.NET MVC 5.x, ASP.NET Web API and jQuery based solution for your web application.</p> </div> </div> <div class="row x-in-on-intro"> <div class="col-md-6 app-item app-number-five"> <h4>#5 XAMARIN mobile application</h4> <div class="image-wrapper"> <img class="img img-responsive" src="/Images/Home/Versions/xamarin.png" width="555" height="328"/> </div> <p>Xamarin mobile application integrated to the backend solution (only for ASP.NET Core (MVC or Angular UI) versions, supports IOS & Android).</p> </div> <div class="col-md-6 app-item app-number-six"> <h4>#6 BONUS: PUBLIC WEB SITE</h4> <div class="image-wrapper"> <img class="img img-responsive" src="/Images/Home/frontend-landing-scrren-1.png" width="768" height="454"/> </div> <p>ASP.NET MVC based application for your public web site.</p> </div> </div> </div> </div> <section id="description" class="half-wrapper"> <div class="container half-full"> <div class="row"> <div class="col-md-6 half-column set-left"> <div class="half-col-containt"> <div class="heading"> <p> What is ASP.NET ZERO? </p> <span></span> </div> <p> ASP.NET Zero is a starting point for new web applications with a <strong>modern UI</strong> and <strong>solid architecture</strong>. It <strong>saves your time</strong> by providing pre-built and working pages and a strong <strong>infrastructure</strong>. </p> <p style="font-size: 1.1em"> <strong>Get it as your base application and directly start to develop your business code!</strong> </p> <ul class="check-list"> <li><i class="fa fa-check"></i> SOLID architecture</li> <li><i class="fa fa-check"></i> Cross-cutting concerns implemented</li> <li><i class="fa fa-check"></i> Built with best practices</li> <li><i class="fa fa-check"></i> Well documented</li> <li><i class="fa fa-check"></i> Full source code included</li> </ul> <p class="btn-horizontal"> <a href="#CreateDemoFormContainer" class="btn btn-primary live-demo-button inpage-animate-link">LIVE DEMO</a> <a href="#features" class="btn btn-primary inpage-animate-link">FEATURES</a> </p> </div> </div> <div class="col-md-6 half-column set-right"> <div class="half-col-containt"> <div class="heading"> <p> Based on familiar tools! </p> <span></span> </div> <div id="HomeToolLogos"> <a href="https://www.visualstudio.com" target="_blank"><img alt="Visual Studio" title="Visual Studio" src="/Images/Logos/Tools/visual-studio.png"/></a> <a href="https://www.microsoft.com/net/core" target="_blank"><img alt="Microsoft .Net Core" title="Microsoft .Net Core" src="/Images/Logos/Tools/net-core.png"/></a> <a href="https://www.microsoft.com/net" target="_blank"><img alt="Microsoft .Net Framework 4.6" title="Microsoft .Net Framework 4.6" src="/Images/Logos/Tools/dotnet.png"/></a> <a href="https://docs.microsoft.com/en-us/ef/" target="_blank"><img alt="Entity Framework Core & 6.x" title="Entity Framework Core & 6.x" src="/Images/Logos/Tools/ef.png"/></a> <a href="https://aspnetboilerplate.com/?ref=az" target="_blank"><img alt="ASP.NET Boilerplate" title="ASP.NET Boilerplate - Web Application Framework" src="/Images/Logos/Tools/abp2.png"/></a> <a href="https://angular.io/" target="_blank"><img alt="Angular & Angularjs" title="Angular & Angularjs" src="/Images/Logos/Tools/angular-icon.png"/></a> <a href="http://getbootstrap.com/" target="_blank"><img alt="Twitter Bootstrap" title="Twitter Bootstrap" src="/Images/Logos/Tools/bootstrap.png"/></a> <a href="http://keenthemes.com/metronic/" target="_blank"><img alt="Metronic Theme - Best Selling Admin Theme" title="Metronic Theme - Best Selling Admin Theme" src="/Images/Logos/Tools/metronic.png"/></a> <a href="http://jquery.com/" target="_blank"><img alt="jQuery" title="jQuery" src="/Images/Logos/Tools/jquery.png"/></a> <a href="https://www.asp.net/signalr" target="_blank"><img alt="SignalR" title="SignalR - Real Time Server Client Communication Library" src="/Images/Logos/Tools/signalr.png"/></a> <a href="http://automapper.org/" target="_blank"><img alt="Automapper" title="Automapper" src="/Images/Logos/Tools/automapper.png"/></a> <a href="http://lesscss.org/" target="_blank"><img alt="Less CSS" title="Less CSS" src="/Images/Logos/Tools/less.png"/></a> <a href="https://www.w3schools.com/css/css3_intro.asp" target="_blank"><img alt="CSS 3" title="CSS 3" src="/Images/Logos/Tools/css-3.png"/></a> <a href="https://www.w3.org/TR/html5/" target="_blank"><img alt="HTML 5" title="HTML 5" src="/Images/Logos/Tools/html-5.png"/></a> <a href="https://bower.io/" target="_blank"><img alt="Bower" title="Bower" src="/Images/Logos/Tools/bower.png"/></a> <a href="https://www.npmjs.com/" target="_blank"><img alt="NPM" title="NPM" src="/Images/Logos/Tools/npm.png"/></a> </div> </div> </div> </div> </div> </section> <div class="clearfix"></div> <div id="testimoni" class="dark-section"> <div class="container"> <div class="row text-center"> <div class="col-md-8 col-md-offset-2"> <p class="icon-testimoni"> <i class="fa fa-quote-left"></i> </p> <div id="sync1" class="owl-carousel content-testimoni"> <div class="item"> <p>ABP AspNet Zero is an awesome example of the starting point of an enterprise product. Built using the excellent ABP framework that delivers best practice, flexibility, simplicity and power all in one package. ABP AspNet Zero has allowed me to focus on the business requirements safe in the knowledge that the scaffolding for this is already in place.</p> <p class="name"> Donovan Edye - Founder <a href="http://www.natiki.com.au/" target="_blank">Natiki Web Solutions</a>, Solution Architect at <a href="https://www.ozcruising.com.au/" target="_blank">OzCruising</a> </p> </div> <div class="item"> <p>ASP.NET Zero is a stunning example of what modern ASP.NET MVC5 applications are capable of. It's a sublime blend of form and function. New applications can be delivered literally months faster. It's supremely testable and scalable, and with Metronic for the UI, it's ultra modern. The savings and advantages are incalculable.</p> <p class="name"> Michael Hornaday - Solutions Architect at <a href="http://www.izenda.com/">Izenda</a> </p> </div> <div class="item"> <p>AspNet Zero helped us efficiently kickstart KeyReply's backend development. The core features are well designed, and they covered most of our basic business needs for a multi-tenant SaaS solution. The documentation is easy to follow, even for someone with limited .NET experience. We had a great overall experience using AspNet Zero.</p> <p class="name"> Max Xu - Co-founder of <a href="https://keyreply.com/">Keyreply</a> </p> </div> <div class="item"> <p>We are still in development but the head start AspNet Zero gave us was definitely worth it. In addition the documentation and best practices described their has helped us to build on the framework in a consistent manner. Basically it has all the stuff you read about baked in a real world example.</p> <p class="name"> Rahul Patel - CTO at <a href="http://www.parsus.com/">Parsus</a> </p> </div> <div class="item"> <p>A great start for our new project. The speed of development and quality of the product is much better than any self-architected approach.</p> <p class="name"> Ole Eirik Øren - Developer at <a href="http://www.tempus.no/">Tempus</a> </p> </div> </div> <div class="author-testimoni"> <div id="sync2" class="owl-carousel"> <div class="item"> <img src="/sugan/img/people/1.png" width="40" height="40" alt=""/> </div> <div class="item"> <img src="/sugan/img/people/1.png" width="40" height="40" alt=""/> </div> <div class="item"> <img src="/sugan/img/people/1.png" width="40" height="40" alt=""/> </div> <div class="item"> <img src="/sugan/img/people/1.png" width="40" height="40" alt=""/> </div> <div class="item"> <img src="/sugan/img/people/1.png" width="40" height="40" alt=""/> </div> </div> </div> </div> </div> </div> </div> <section id="features" class="half-wrapper"> <div class="container half-full"> <div class="row"> <div class="col-md-6 half-column set-left"> <div class="half-col-containt"> <div class="heading"> <h5>Features</h5> <p> ASP.NET ZERO key features </p> <span></span> </div> <ul class="feature-list"> <li> <span class="icon-diamond icon-2x icon-color icon-left"></span> <h5>6 IN 1</h5> <ul class="feature-list-inner"> <li><i class="fa fa-check"></i> ASP.NET CORE 2.x and ANGULAR 6.x based Single-Page Application (SPA) solution for your web application (with .net framework 4.6.1 / .net core options)</li> <li><i class="fa fa-check"></i> ASP.NET CORE 2.x and jQuery based solution for your web application (with .net framework 4.6.1 / .net core options)</li> <li><i class="fa fa-check"></i> ASP.NET MVC 5.x, Web API and AngularJs 1.x based Single-Page Application (SPA) solution for your web application</li> <li><i class="fa fa-check"></i> ASP.NET MVC 5.x and jQuery based solution for your web application</li> <li><i class="fa fa-check"></i> XAMARIN mobile application integrated to the backend solution.</li> <li><i class="fa fa-check"></i> Bonus: ASP.NET CORE/MVC based application for your public web site</li> </ul> </li> <li> <span class="icon-globe icon-2x icon-color icon-left"></span> <h5>MULTI-TENANCY (SaaS Development)</h5> <ul class="feature-list-inner"> <li><i class="fa fa-check"></i> Tenant and Edition (package) management for SaaS applications</li> <li>Subscription management &amp; Paypal payment integration</li> <li>Dashboard for edition, tenant &amp; income statistics</li> <li><i class="fa fa-check"></i> Single database, database per tenant and hybrid database support</li> <li><i class="fa fa-check"></i> Custom tenant logo and CSS support</li> <li><i class="fa fa-check"></i> Can work in multi-tenant and single-tenant modes</li> </ul> </li> <li> <span class="icon-lock icon-2x icon-color icon-left"></span> <h5>AUTHENTICATION & AUTHORIZATION</h5> <ul class="feature-list-inner"> <li><i class="fa fa-check"></i> Based on ASP.NET Identity Framework</li> <li><i class="fa fa-check"></i> User & role management pages</li> <li><i class="fa fa-check"></i> Hierarchical organization units system to group users and entities</li> <li><i class="fa fa-check"></i> User login, register, password-reset and email validation pages</li> <li><i class="fa fa-check"></i> User, role and permission based flexible authorization</li> <li><i class="fa fa-check"></i> User and Tenant impersonation</li> <li><i class="fa fa-check"></i> User account linking</li> <li><i class="fa fa-check"></i> Two Factor Authentication (Email, SMS, Google Authenticator)</li> <li><i class="fa fa-check"></i> User Lockout</li> <li><i class="fa fa-check"></i> LDAP/Active Directory login support</li> <li><i class="fa fa-check"></i> Active Directory Federation Service (ADFS) Authentication</li> <li><i class="fa fa-check"></i> Social media logins (Facebook, Twitter, Google+ and Microsoft Account implemented)</li> <li><i class="fa fa-check"></i> OpenId Connect Authentication</li> <li><i class="fa fa-check"></i> Log and show all login attempts for users</li> <li><i class="fa fa-check"></i> Password complexity settings</li> <li><i class="fa fa-check"></i> Automatic Cross-Site Request Forgery (CSRF) protection</li> <li>IdentityServer4 integration</li> </ul> </li> <li> <span class="icon-flag icon-2x icon-color icon-left"></span> <h5>DYNAMIC UI LOCALIZATION</h5> <ul class="feature-list-inner"> <li><i class="fa fa-check"></i> Fully localized UI</li> <li><i class="fa fa-check"></i> Can add, remove and translate languages on UI</li> <li><i class="fa fa-check"></i> RTL and LTR support</li> <li><i class="fa fa-check"></i> English, Chinese, German, French, Italian, Russian, Portuguese (Brazil), Spanish (Mexico), Spanish (Spain), Turkish and Arabic localizations are included</li> </ul> </li> <li> <span class="icon-settings icon-2x icon-color icon-left"></span> <h5>SETTING MANAGEMENT</h5> <ul class="feature-list-inner"> <li><i class="fa fa-check"></i> Host & tenant specific setting pages</li> <li><i class="fa fa-check"></i> Easily configurable</li> </ul> </li> </ul> </div> </div> <div class="col-md-6 half-column set-right"> <div class="half-col-containt"> <div class="heading hidden-xs hidden-sm"> <h5>&nbsp;</h5> <p> &nbsp; </p> </div> <ul class="feature-list"> <li> <span class="icon-screen-smartphone icon-2x icon-color icon-left"></span> <h5><span class="label label-success">NEW</span> MOBILE APPLICATION</h5> <ul class="feature-list-inner"> <li><i class="fa fa-check"></i> Cross platform (IOS & Android) Xamarin mobile application</li> <li><i class="fa fa-check"></i> Integrated to backend</li> <li><i class="fa fa-check"></i> Provides infrastructure for common development tasks</li> </ul> </li> <li> <span class="icon-magic-wand icon-2x icon-color icon-left"></span> <h5><span class="label label-success">NEW</span> RAPID APPLICATION DEVELOPMENT</h5> <ul class="feature-list-inner"> <li><i class="fa fa-check"></i> A Visual Studio extension (and command line tool) to create an entity from database to the UI layer by just defining its properties (<a href="https://www.youtube.com/watch?v=lqu7AVBTepw" target="_blank">see how it works</a>).</li> </ul> </li> <li> <span class="icon-bulb icon-2x icon-color icon-left"></span> <h5>SOLID ARCHITECTURE</h5> <ul class="feature-list-inner"> <li><i class="fa fa-check"></i> Clean source code in a well-defined solution structure</li> <li><i class="fa fa-check"></i> Layered & modular architecture</li> <li><i class="fa fa-check"></i> Implemented Domain Driven Design</li> <li><i class="fa fa-check"></i> Dependency injection everywhere</li> </ul> </li> <li> <span class="icon-wrench icon-2x icon-color icon-left"></span> <h5>BASED ON STRONG FRAMEWORKS</h5> <ul class="feature-list-inner"> <li><i class="fa fa-check"></i> .Net Framework 4.6.1 / .Net Core 2.0 (cross platform support)</li> <li><i class="fa fa-check"></i> ASP.NET Core / ASP.NET MVC & Web API</li> <li><i class="fa fa-check"></i> EntityFramework Code-First and Migrations</li> <li><i class="fa fa-check"></i> <a href="https://aspnetboilerplate.com/?ref=az" target="_blank">ASP.NET Boilerplate</a></li> <li><i class="fa fa-check"></i> AutoMapper</li> </ul> </li> <li> <span class="icon-screen-desktop icon-2x icon-color icon-left"></span> <h5>BASED ON <a href="http://www.keenthemes.com/metronic/" target="_blank">METRONIC THEME</a></h5> <ul class="feature-list-inner"> <li><i class="fa fa-check"></i> Bootstrap based</li> <li><i class="fa fa-check"></i> Responsive design</li> </ul> </li> <li> <span class="icon-clock icon-2x icon-color icon-left"></span> <h5>AUTOMATED TESTING</h5> <ul class="feature-list-inner"> <li><i class="fa fa-check"></i> Testable architecture</li> <li><i class="fa fa-check"></i> Includes unit & integration test written with xUnit</li> </ul> </li> <li> <span class="icon-rocket icon-2x icon-color icon-left"></span> <h5>CROSS CUTTING CONCERNS</h5> <ul class="feature-list-inner"> <li><i class="fa fa-check"></i> Validation</li> <li><i class="fa fa-check"></i> Logging</li> <li><i class="fa fa-check"></i> Exception handling</li> <li><i class="fa fa-check"></i> Caching</li> <li><i class="fa fa-check"></i> Automatic audit/security logging</li> <li><i class="fa fa-check"></i> Automatic database connection management and unit of work implementation</li> </ul> </li> <li> <span class="icon-grid icon-2x icon-color icon-left"></span> <h5>AND MORE...</h5> <ul class="feature-list-inner"> <li><i class="fa fa-check"></i> Pre-configured to deploy as Docker containers</li> <li><i class="fa fa-check"></i> Application functionalities are also available as HTTP API.</li> <li><i class="fa fa-check"></i> Real time push notification system (with SignalR integration)</li> <li><i class="fa fa-check"></i> Chat system (with SignalR integration)</li> <li><i class="fa fa-check"></i> Background job system (with Hangfire integration)</li> <li><i class="fa fa-check"></i> Multiple time zone support for application, tenant and users</li> <li><i class="fa fa-check"></i> Built-in global event bus for server-side events (with pre-defined events for entity changes)</li> <li><i class="fa fa-check"></i> Show and download logs from UI</li> <li><i class="fa fa-check"></i> Application setup screen</li> <li><i class="fa fa-check"></i> Personalization of layout, header, menu and footer per user.</li> <li><i class="fa fa-check"></i> Tested on major PAAS providers (Azure, AWS)</li> </ul> </li> <li> <i>Different architectures/versions have some differences. See <a href="/Documents/Version-Differences"><b>table of differences</b></a>.</i> </li> </ul> </div> </div> </div> </div> </section> <div id="workit"> <div class="parallax"> <div class="container"> <div class="row"> <div class="col-md-12 text-center marginbot20"> <h5>How it works?</h5> </div> <div class="col-md-4 workit-box"> <span class="icon-basket icon-2x icon-color icon-left"></span> <h6>Purchase</h6> <p>Purchase a license based on your needs.</p> <a href="#pricing">see prices</a> </div> <div class="col-md-4 workit-box"> <span class="icon-magic-wand icon-2x icon-color icon-left"></span> <h6>Create your project</h6> <p>Create your ready & working solution in 5 minutes.</p> <a href="/Documents/Getting-Started">see how</a> </div> <div class="col-md-4 workit-box"> <span class="icon-cup icon-2x icon-color icon-left"></span> <h6>Develop your application</h6> <p>Start developing your application! Read documentation to learn more.</p> <a href="/Documents">see docs</a> </div> </div> </div> </div> </div> <section id="pricing" class="wrapper" style="padding-bottom: 40px"> <div class="container"> <div class="row"> <div class="col-md-8 col-md-offset-2"> <div class="heading centered"> <h5>Pricing</h5> <p> Choose a license </p> <span></span> </div> </div> <div class="col-md-4"> <div class="pricing-wrapper"> <div class="pricing-head"> <sup>$</sup> <span class="pricing-price">1,499</span> <h4>REGULAR LICENSE</h4> </div> <div class="pricing-containt"> <ul> <li><i class="fa fa-check"></i> Develop single product</li> <li><i class="fa fa-check"></i> Up to 3 developers</li> <li><i class="fa fa-check"></i> Full source code <sup>[1]</sup></li> <li><i class="fa fa-check"></i> Includes Metronic licenses</li> <li><i class="fa fa-check"></i> 1 year premium forum membership</li> <li><i class="fa fa-check"></i> 1 year access to the latest source code <sup>[2]</sup></li> </ul> </div> <div class="pricing-bottom"> <a href="/Payment/Checkout?LicenseType=Regular" class="btn btn-primary">Purchase</a> </div> </div> </div> <div class="col-md-4"> <div class="pricing-wrapper pricing-recommended"> <div class="pricing-recommended-head">RECOMMENDED</div> <div class="pricing-head"> <sup>$</sup> <span class="pricing-price">2,899</span> <h4>ENTERPRISE LICENSE</h4> </div> <div class="pricing-containt"> <ul> <li><i class="fa fa-check"></i> Develop up to 3 products</li> <li><i class="fa fa-check"></i> Up to 10 developers</li> <li><i class="fa fa-check"></i> Full source code <sup>[1]</sup></li> <li><i class="fa fa-check"></i> Includes Metronic licenses</li> <li><i class="fa fa-check"></i> 1-year premium forum membership</li> <li><i class="fa fa-check"></i> 1-year access to the latest source code <sup>[2]</sup></li> </ul> </div> <div class="pricing-bottom"> <a href="/Payment/Checkout?LicenseType=Enterprise" class="btn btn-primary">Purchase</a> </div> </div> </div> <div class="col-md-4"> <div class="pricing-wrapper"> <div class="pricing-head"> <sup>$</sup> <span class="pricing-price">4,499</span> <h4>ULTIMATE LICENSE</h4> </div> <div class="pricing-containt"> <ul> <li><i class="fa fa-check"></i> Develop up to 6 products</li> <li><i class="fa fa-check"></i> Up to 20 developers</li> <li><i class="fa fa-check"></i> Full source code <sup>[1]</sup></li> <li><i class="fa fa-check"></i> Includes Metronic licenses</li> <li><i class="fa fa-check"></i> 1-year premium forum membership</li> <li><i class="fa fa-check"></i> 1-year access to the latest source code <sup>[2]</sup></li> </ul> </div> <div class="pricing-bottom"> <a href="/Payment/Checkout?LicenseType=Ultimate" class="btn btn-primary">Purchase</a> </div> </div> </div> </div> <div class="row"> <div class="col-md-12 text-center" style="margin-top: 30px"> <p> <a href="#contact">Contact us</a> if you have a <strong>custom</strong> license requirement. </p> </div> </div> <div class="row"> <div class="col-md-12 text-muted"> <small> <sup>[1]</sup> <em><strong>Life time</strong> usage, <strong>no limit</strong> on deployment or server counts. See <a href="/Faq">FAQ</a> for more.</em><br/> <sup>[2]</sup> <em>Access to the latest source code on Github, create/recreate your project in any architecture in the given period of time.</em> </small> </div> </div> <div class="row our-clients-section"> <div class="col-md-12"> <h4 class="text-center">Our Customers</h4> <div class="our-clients-list text-center"> <div class="bwWrapper"><img src="/Images/Logos/Clients/nasa-logo-2.png" title="Nasa"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/ATT.png" title="AT&amp;T"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/ey.png" title="Ernst &amp; Young"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/fuji-film.png" title="Fuji Film"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/nec.png" title="Nec"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/ert.png" title="Ert"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/Glintt.png" title="Glintt"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/miami-uni.png" title="Miami University"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/houston-texans-2.png" title="Houston Texans"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/UiPathjpg.jpg" title="Ui Path"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/pwc.JPG" title="Pwc"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/Deloitte.png" title="Deloitte"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/dh.png" title="D+h"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/aam_logo.jpg" title="AAM Group"/></div> <div class="bwWrapper"><img src="/Images/Logos/Clients/DEKRA-logo.jpg" title="Dekra"/></div> </div> </div> <div class="col-md-12" style="text-align: center;"> <a href="/Customers">See more</a> </div> </div> </div> </section> <div id="subscribe" class="dark-section"> <div class="container"> <div class="row text-center"> <div class="col-md-8 col-md-offset-2"> <h5>SUBSCRIBE TO OUR NEWSLETTER!</h5> <p> Subscribe now to get the latest ASP.NET ZERO happenings in our newsletter. </p> <form id="NewsLetterSubscribeForm"> <fieldset class="subscribe-form"> <input class="subscribe" type="email" required="" maxlength="255" name="EmailAddress" placeholder="Enter your email address"> <button class="btn-subscribe" type="submit"><i class="fa fa-paper-plane"></i></button> </fieldset> </form> </div> </div> </div> </div> <section id="contact"> <div class="container"> <div class="row"> <div class="col-md-12"> <div class="half-col-containt"> <div class="heading"> <h5>Contact us</h5> <p> Have questions? Please get in touch with us </p> <span></span> </div> <form id="contactform" class="validateform" name="leaveContact"> <div class="clearfix"></div> <div id="sendmessage"> <div class="alert alert-info marginbot35"> <button type="button" class="close" data-dismiss="alert">&times;</button> <strong>Your message has been sent. Thank you!</strong><br/> </div> </div> <ul class="listForm"> <li> <label>Name :</label> <input class="form-control input-name input-lg" type="text" name="Name" required="" maxlength="64" placeholder="Enter your full name . . ." style="max-width: 400px"/> <div class="validation"></div> </li> <li> <label>Email :</label> <input class="form-control input-email input-lg" type="email" name="EmailAddress" required="" maxlength="255" placeholder="Enter your email address . . ." style="max-width: 400px"/> <div class="validation"></div> </li> <li> <label>Message :</label> <textarea class="form-control input-lg" rows="8" name="Message" required="" maxlength="16384" placeholder="Write your message . . ."></textarea> <div class="validation"></div> </li> <li> <input type="submit" value="Send message" class="btn btn-primary" name="Submit"/> </li> </ul> </form> </div> </div> </div> </div> </section> <div class="clearfix"></div> <footer> <div class="container"> <div class="row"> <div class="col-sm-9 widget"> <h2 class="margin-bottom-0">Latest tweets</h2> <a class="twitter-timeline" href="https://twitter.com/aspnetzero" data-tweet-limit="2" data-theme="dark" data-link-color="#57C8EB" data-widget-id="633248835645607936" data-chrome="noheader nofooter noscrollbar noborders transparent">Tweets by @aspnetzero</a> </div> <div class="col-sm-3 widget"> <ul class="social-link text-right"> <li><a href="https://twitter.com/aspnetzero" target="_blank"><i class="fa fa-twitter"></i></a></li> <li><a href="https://github.com/aspnetzero" target="_blank"><i class="fa fa-github"></i></a></li> </ul> </div> </div> </div> <div class="subfooter"> <p> <a href="mailto:info@aspnetzero.com"><i class="fa fa-envelope-o"></i> <span>info@aspnetzero.com</span></a> | <a href="/Licenses/Eula">Eula</a> | <a href="/Privacy">Privacy Policy</a> </p> <p> 2015 - 2018 &copy; <a href="https://volosoft.com">Volosoft Computer and Technology</a>. </p> <p> Universite Mah. Sarigul sok. Teknokent B Blok, No: 37/1, Ofis no: 320, PK 34320 Avcilar, Istanbul, Turkey </p> </div> </footer> </div> <link href="/Bundles/Home/Index/css?v=KUtZdTs3dVNBZtM9zFAG0U0PBJFEVok4KJWewkBvkbU1" rel="stylesheet"/> <script src="/Home/Index/js?v=gacYisiWqOLvHQxYe45jMXbV00r5jzT4NdHwWrm2Afk1"></script> <script src="/AbpScripts/GetScripts?v=636621306877685445" type="text/javascript"></script> <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-49982725-2', 'auto');
+        ga('send', 'pageview');
+
+        //Tracking for Quic Demo Video Link
+        $(document).ready(function () {
+            $(".js-modal-btn").click(function (e) {
+                ga('send', 'event', 'Video', 'Play', 'Quick Demo');
+            });
+        });
+    </script> <script type="text/javascript">
+            window.showLatestTweets = true;
+        </script> </body> </html>

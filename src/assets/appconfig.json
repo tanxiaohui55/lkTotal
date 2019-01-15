@@ -1,0 +1,18 @@
+{
+    "remoteServiceBaseUrl": "http://cainiao.linkong.vip:22743/",
+    "remoteServiceBaseUrl1": "http://10.10.10.215:22743/",
+    "appBaseUrl": "http://cainiao.linkong.vip:5200",
+    "localeMappings": [{
+            "from": "pt-BR",
+            "to": "pt"
+        },
+        {
+            "from": "zh-CN",
+            "to": "zh"
+        },
+        {
+            "from": "he-IL",
+            "to": "he"
+        }
+    ]
+}

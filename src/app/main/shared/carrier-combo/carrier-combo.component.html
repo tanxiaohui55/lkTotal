@@ -1,0 +1,7 @@
+<select #CarrierCombobox
+        class="form-control"
+        [(ngModel)]="selectedCarrier"
+        (ngModelChange)="selectedCarrierChange.emit($event)"
+        [attr.data-live-search]="true">
+            <option *ngFor="let carrierItem of carriers" [value]="carrierItem.code">{{carrierItem.name}}</option>
+</select>

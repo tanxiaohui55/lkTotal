@@ -1,0 +1,1010 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["app-main-main-module"],{
+
+/***/ "./node_modules/angular2-counto/index.js":
+/*!***********************************************!*\
+  !*** ./node_modules/angular2-counto/index.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var counto_directive_1 = __webpack_require__(/*! ./src/counto.directive */ "./node_modules/angular2-counto/src/counto.directive.js");
+exports.CountoDirective = counto_directive_1.CountoDirective;
+var counto_module_1 = __webpack_require__(/*! ./src/counto.module */ "./node_modules/angular2-counto/src/counto.module.js");
+exports.CountoModule = counto_module_1.CountoModule;
+exports.default = counto_module_1.CountoModule;
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./node_modules/angular2-counto/src/counto.directive.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/angular2-counto/src/counto.directive.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var CountoDirective = /** @class */ (function () {
+    function CountoDirective() {
+        this.countoChange = new core_1.EventEmitter();
+        this.countoEnd = new core_1.EventEmitter();
+    }
+    Object.defineProperty(CountoDirective.prototype, "duration", {
+        set: function (duration) {
+            this._duration = parseFloat(duration);
+            this.run();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CountoDirective.prototype, "countTo", {
+        set: function (countTo) {
+            this._countTo = parseFloat(countTo);
+            this.run();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CountoDirective.prototype, "countFrom", {
+        set: function (countFrom) {
+            this._countFrom = parseFloat(countFrom);
+            this.run();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(CountoDirective.prototype, "step", {
+        set: function (step) {
+            this._step = parseFloat(step);
+            this.run();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    CountoDirective.prototype.run = function () {
+        var _this = this;
+        clearInterval(_this._timer);
+        if (isNaN(_this._duration)) {
+            return false;
+        }
+        if (isNaN(_this._step)) {
+            return false;
+        }
+        if (isNaN(_this._countFrom)) {
+            return false;
+        }
+        if (isNaN(_this._countTo)) {
+            return false;
+        }
+        if (_this._step <= 0) {
+            console.info('Step must be greater than 0.');
+            return false;
+        }
+        if (_this._duration <= 0) {
+            console.info('Duration must be greater than 0.');
+            return false;
+        }
+        if (_this._step > _this._duration * 1000) {
+            console.info('Step must be equal or smaller than duration.');
+            return false;
+        }
+        var intermediate = _this._countFrom;
+        var increment = Math.abs(_this._countTo - _this._countFrom) / ((_this._duration * 1000) / _this._step);
+        _this.countoChange.emit(intermediate);
+        _this._timer = setInterval(function () {
+            if (_this._countTo < _this._countFrom) {
+                if (intermediate <= _this._countTo) {
+                    clearInterval(_this._timer);
+                    _this.countoChange.emit(_this._countTo);
+                    _this.countoEnd.emit();
+                }
+                else {
+                    _this.countoChange.emit(intermediate);
+                    intermediate -= increment;
+                }
+            }
+            else {
+                if (intermediate >= _this._countTo) {
+                    clearInterval(_this._timer);
+                    _this.countoChange.emit(_this._countTo);
+                    _this.countoEnd.emit();
+                }
+                else {
+                    _this.countoChange.emit(intermediate);
+                    intermediate += increment;
+                }
+            }
+        }, _this._step);
+    };
+    CountoDirective.decorators = [
+        { type: core_1.Directive, args: [{
+                    selector: '[counto]'
+                },] },
+    ];
+    /** @nocollapse */
+    CountoDirective.ctorParameters = function () { return []; };
+    CountoDirective.propDecorators = {
+        "countoChange": [{ type: core_1.Output },],
+        "countoEnd": [{ type: core_1.Output },],
+        "duration": [{ type: core_1.Input },],
+        "countTo": [{ type: core_1.Input },],
+        "countFrom": [{ type: core_1.Input },],
+        "step": [{ type: core_1.Input },],
+    };
+    return CountoDirective;
+}());
+exports.CountoDirective = CountoDirective;
+//# sourceMappingURL=counto.directive.js.map
+
+/***/ }),
+
+/***/ "./node_modules/angular2-counto/src/counto.module.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/angular2-counto/src/counto.module.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var counto_directive_1 = __webpack_require__(/*! ./counto.directive */ "./node_modules/angular2-counto/src/counto.directive.js");
+var CountoModule = /** @class */ (function () {
+    function CountoModule() {
+    }
+    CountoModule.decorators = [
+        { type: core_1.NgModule, args: [{
+                    declarations: [counto_directive_1.CountoDirective],
+                    exports: [counto_directive_1.CountoDirective]
+                },] },
+    ];
+    /** @nocollapse */
+    CountoModule.ctorParameters = function () { return []; };
+    return CountoModule;
+}());
+exports.CountoModule = CountoModule;
+//# sourceMappingURL=counto.module.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ng2modules-easypiechart/easypiechart.component.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/ng2modules-easypiechart/easypiechart.component.js ***!
+  \************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var EasyPieChartComponent = (function () {
+    function EasyPieChartComponent(el) {
+        this.element = el.nativeElement;
+        var options = {
+            barColor: '#ef1e25',
+            trackColor: '#f9f9f9',
+            scaleColor: '#dfe0e0',
+            scaleLength: 5,
+            lineCap: 'round',
+            lineWidth: 3,
+            size: 110,
+            rotate: 0,
+            animate: {
+                duration: 1000,
+                enabled: true
+            }
+        };
+        this.options = Object.assign(options, this.options);
+    }
+    EasyPieChartComponent.prototype.ngOnInit = function () {
+        this.element.innerHTML = "";
+        this.pieChart = new EasyPieChart(this.element, this.options);
+        this.pieChart.update(this.percent);
+    };
+    EasyPieChartComponent.prototype.ngOnChanges = function (changes) {
+        if (!changes['percent'].isFirstChange()) {
+            this.pieChart.update(this.percent);
+        }
+    };
+    return EasyPieChartComponent;
+}());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], EasyPieChartComponent.prototype, "percent", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Object)
+], EasyPieChartComponent.prototype, "options", void 0);
+EasyPieChartComponent = __decorate([
+    core_1.Component({
+        selector: 'easy-pie-chart',
+        template: "<div>Loading...</div>"
+    }),
+    __metadata("design:paramtypes", [core_1.ElementRef])
+], EasyPieChartComponent);
+exports.EasyPieChartComponent = EasyPieChartComponent;
+//# sourceMappingURL=easypiechart.component.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ng2modules-easypiechart/easypiechart.module.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/ng2modules-easypiechart/easypiechart.module.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var easypiechart_component_1 = __webpack_require__(/*! ./easypiechart.component */ "./node_modules/ng2modules-easypiechart/easypiechart.component.js");
+var EasyPieChartModule = (function () {
+    function EasyPieChartModule() {
+    }
+    return EasyPieChartModule;
+}());
+EasyPieChartModule = __decorate([
+    core_1.NgModule({
+        imports: [],
+        exports: [easypiechart_component_1.EasyPieChartComponent],
+        declarations: [easypiechart_component_1.EasyPieChartComponent]
+    }),
+    __metadata("design:paramtypes", [])
+], EasyPieChartModule);
+exports.EasyPieChartModule = EasyPieChartModule;
+//# sourceMappingURL=easypiechart.module.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ng2modules-easypiechart/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/ng2modules-easypiechart/index.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+__export(__webpack_require__(/*! ./easypiechart.module */ "./node_modules/ng2modules-easypiechart/easypiechart.module.js"));
+//# sourceMappingURL=index.js.map
+
+/***/ }),
+
+/***/ "./src/app/main/dashboard/dashboard.component.html":
+/*!*********************************************************!*\
+  !*** ./src/app/main/dashboard/dashboard.component.html ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div [@routerTransition] id=\"TenantDashboard\">\n    <div class=\"m-subheader\">\n        <div class=\"d-flex align-items-center\">\n            <div class=\"mr-auto\">\n                <h3 class=\"m-subheader__title m-subheader__title--separator\">\n                    <span>{{l(\"Dashboard\")}}</span>\n                </h3>\n                <span class=\"m-section__sub\">\n                    {{l(\"DashboardHeaderInfo\")}}\n                </span>\n            </div>\n\n        </div>\n    </div>\n\n    <div class=\"m-content\">\n\n        <div class=\"m-portlet\">\n            <div class=\"m-portlet__body  m-portlet__body--no-padding\">\n                <div class=\"row m-row--no-padding m-row--col-separator-xl\">\n                    <div class=\"col-md-12 col-lg-6 col-xl-3\">\n                        <div class=\"m-widget24\">\n                            <div class=\"m-widget24__item\">\n                                <h4 class=\"m-widget24__title\">\n                                    Total Frofit\n                                </h4>\n                                <br>\n                                <span class=\"m-widget24__desc\">\n                                    All Customs Value\n                                </span>\n                                <span class=\"m-widget24__stats m--font-brand\">\n                                    $ <span counto [step]=\"30\"\n                                            [duration]=\"1\"\n                                            [countFrom]=\"0\"\n                                            [countTo]=\"dashboardHeaderStats.totalProfit\"\n                                            (countoChange)=\"dashboardHeaderStats.totalProfitCounter = $event\">\n                                        {{dashboardHeaderStats.totalProfitCounter.toFixed(0)}}\n                                    </span>\n                                </span>\n                                <div class=\"m--space-10\"></div>\n                                <div class=\"progress m-progress--sm\">\n                                    <div class=\"progress-bar m--bg-brand\" role=\"progressbar\" style=\"width: 76%;\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\n                                </div>\n                                <span class=\"m-widget24__change\">\n                                    Change\n                                </span>\n                                <span class=\"m-widget24__number\">\n                                    <span class=\"counterup\">{{dashboardHeaderStats.totalProfitChange}}</span>%\n                                </span>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-md-12 col-lg-6 col-xl-3\">\n                        <div class=\"m-widget24\">\n                            <div class=\"m-widget24__item\">\n                                <h4 class=\"m-widget24__title\">\n                                    New Feedbacks\n                                </h4>\n                                <br>\n                                <span class=\"m-widget24__desc\">\n                                    Customer Review\n                                </span>\n                                <span class=\"m-widget24__stats m--font-info\"\n                                      counto\n                                      [step]=\"30\"\n                                      [duration]=\"1\"\n                                      [countFrom]=\"0\"\n                                      [countTo]=\"dashboardHeaderStats.newFeedbacks\"\n                                      (countoChange)=\"dashboardHeaderStats.newFeedbacksCounter = $event\">\n                                    {{dashboardHeaderStats.newFeedbacksCounter.toFixed(0)}}\n                                </span>\n                                <div class=\"m--space-10\"></div>\n                                <div class=\"progress m-progress--sm\">\n                                    <div class=\"progress-bar m--bg-info\" role=\"progressbar\" style=\"width: 85%;\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\n                                </div>\n                                <span class=\"m-widget24__change\">\n                                    Change\n                                </span>\n                                <span class=\"m-widget24__number\">\n                                    <span class=\"counterup\">{{dashboardHeaderStats.newFeedbacksChange}}</span>%\n                                </span>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-md-12 col-lg-6 col-xl-3\">\n                        <div class=\"m-widget24\">\n                            <div class=\"m-widget24__item\">\n                                <h4 class=\"m-widget24__title\">\n                                    New Orders\n                                </h4>\n                                <br>\n                                <span class=\"m-widget24__desc\">\n                                    Fresh Order Amount\n                                </span>\n                                <span class=\"m-widget24__stats m--font-info\"\n                                      counto\n                                      [step]=\"30\"\n                                      [duration]=\"1\"\n                                      [countFrom]=\"0\"\n                                      [countTo]=\"dashboardHeaderStats.newOrders\"\n                                      (countoChange)=\"dashboardHeaderStats.newOrdersCounter = $event\">\n                                    {{dashboardHeaderStats.newOrdersCounter.toFixed(0)}}\n                                </span>\n                                <div class=\"m--space-10\"></div>\n                                <div class=\"progress m-progress--sm\">\n                                    <div class=\"progress-bar m--bg-danger\" role=\"progressbar\" style=\"width: 45%;\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\n                                </div>\n                                <span class=\"m-widget24__change\">\n                                    Change\n                                </span>\n                                <span class=\"m-widget24__number\">\n                                    <span class=\"counterup\">{{dashboardHeaderStats.newOrdersChange}}</span>%\n                                </span>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"col-md-12 col-lg-6 col-xl-3\">\n                        <div class=\"m-widget24\">\n                            <div class=\"m-widget24__item\">\n                                <h4 class=\"m-widget24__title\">\n                                    New Users\n                                </h4>\n                                <br>\n                                <span class=\"m-widget24__desc\">\n                                    Joined New User\n                                </span>\n                                <span class=\"m-widget24__stats m--font-info\"\n                                      counto\n                                      [step]=\"30\"\n                                      [duration]=\"1\"\n                                      [countFrom]=\"0\"\n                                      [countTo]=\"dashboardHeaderStats.newUsers\"\n                                      (countoChange)=\"dashboardHeaderStats.newUsersCounter = $event\">\n                                    {{dashboardHeaderStats.newUsersCounter.toFixed(0)}}\n                                </span>\n                                <div class=\"m--space-10\"></div>\n                                <div class=\"progress m-progress--sm\">\n                                    <div class=\"progress-bar m--bg-success\" role=\"progressbar\" style=\"width: 57%;\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\n                                </div>\n                                <span class=\"m-widget24__change\">\n                                    Change\n                                </span>\n                                <span class=\"m-widget24__number\">\n                                    <span class=\"counterup\">{{dashboardHeaderStats.newUsersChange}}</span>%\n                                </span>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\">\n            <div class=\"col-md-6 col-sm-12\">\n                <div class=\"m-portlet m-portlet--full-height\">\n                    <div class=\"m-portlet__head\">\n                        <div class=\"m-portlet__head-caption\">\n                            <div class=\"m-portlet__head-title\">\n                                <h3 class=\"m-portlet__head-text\">\n                                    Sales Summary\n                                </h3>\n                            </div>\n                        </div>\n                        <div class=\"m-portlet__head-tools\">\n                            <div class=\"btn-group btn-group-devided\" data-toggle=\"buttons\">\n                                <label class=\"btn m-btn--pill btn-secondary active\" (click)=\"salesSummaryChart.reload(appSalesSummaryDateInterval.Daily)\">\n                                    <input type=\"radio\"\n                                           name=\"SalesSummaryDateInterval\"\n                                           class=\"toggle\"\n                                           [value]=\"appSalesSummaryDateInterval.Daily\">\n                                    {{l(\"Daily\")}}\n                                </label>\n                                <label class=\"btn m-btn--pill btn-secondary\" (click)=\"salesSummaryChart.reload(appSalesSummaryDateInterval.Weekly)\">\n                                    <input type=\"radio\"\n                                           name=\"SalesSummaryDateInterval\"\n                                           class=\"toggle\"\n                                           [value]=\"appSalesSummaryDateInterval.Weekly\">\n                                    {{l(\"Weekly\")}}\n                                </label>\n                                <label class=\"btn m-btn--pill btn-secondary\" (click)=\"salesSummaryChart.reload(appSalesSummaryDateInterval.Monthly)\">\n                                    <input type=\"radio\"\n                                           name=\"SalesSummaryDateInterval\"\n                                           class=\"toggle\"\n                                           [value]=\"appSalesSummaryDateInterval.Monthly\">\n                                    {{l(\"Monthly\")}}\n                                </label>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"m-portlet__body\" [busyIf]=\"salesSummaryChart.loading\">\n                        <div class=\"row list-separated\">\n                            <div class=\"col-md-3 col-sm-3 col-xs-6\">\n                                <h6>\n                                    Total Sales\n                                </h6>\n                                <div>\n                                    <span counto\n                                          class=\"m--font-danger m--font-bolder\"\n                                          [step]=\"30\"\n                                          [duration]=\"1\"\n                                          [countFrom]=\"0\"\n                                          [countTo]=\"salesSummaryChart.totalSales\"\n                                          (countoChange)=\"salesSummaryChart.totalSalesCounter = $event\">\n                                        {{salesSummaryChart.totalSalesCounter.toFixed(0)}}\n                                    </span>\n                                    <span class=\"m--font-danger m--font-bolder\">$</span>\n                                </div>\n                            </div>\n                            <div class=\"col-md-3 col-sm-3 col-xs-6\">\n                                <h6>\n                                    Revenue\n                                </h6>\n                                <div class=\"uppercase font-hg font-green-haze\">\n                                    <span counto\n                                          class=\"m--font-warning m--font-bolder\"\n                                          [step]=\"30\"\n                                          [duration]=\"1\"\n                                          [countFrom]=\"0\"\n                                          [countTo]=\"salesSummaryChart.revenue\"\n                                          (countoChange)=\"salesSummaryChart.revenuesCounter = $event\">\n                                        {{salesSummaryChart.revenuesCounter.toFixed(0)}}\n                                    </span>\n                                    <span class=\"m--font-warning m--font-bolder\">$</span>\n                                </div>\n                            </div>\n                            <div class=\"col-md-3 col-sm-3 col-xs-6\">\n                                <h6>\n                                    Expenses\n                                </h6>\n                                <div class=\"uppercase font-hg font-purple\">\n                                    <span counto\n                                          class=\"m--font-info m--font-bolder\"\n                                          [step]=\"30\"\n                                          [duration]=\"1\"\n                                          [countFrom]=\"0\"\n                                          [countTo]=\"salesSummaryChart.expenses\"\n                                          (countoChange)=\"salesSummaryChart.expensesCounter = $event\">\n                                        {{salesSummaryChart.expensesCounter.toFixed(0)}}\n                                    </span>\n                                    <span class=\"m--font-success m--font-bolder\">$</span>\n                                </div>\n                            </div>\n                            <div class=\"col-md-3 col-sm-3 col-xs-6\">\n                                <h6>\n                                    Growth\n                                </h6>\n                                <div class=\"uppercase font-hg font-blue-sharp\">\n                                    <span counto\n                                          class=\"m--font-info m--font-bolder\"\n                                          [step]=\"30\"\n                                          [duration]=\"1\"\n                                          [countFrom]=\"0\"\n                                          [countTo]=\"salesSummaryChart.growth\"\n                                          (countoChange)=\"salesSummaryChart.growthCounter = $event\">\n                                        {{salesSummaryChart.growthCounter.toFixed(0)}}\n                                    </span>\n                                    <span class=\"m--font-info m--font-bolder\">$</span>\n                                </div>\n                            </div>\n                        </div>\n\n                        <div id=\"salesStatistics\"\n                             class=\"portlet-body-morris-fit morris-chart\"\n                             style=\"height: 260px;\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-md-6 col-sm-12\">\n                <div class=\"m-portlet m-portlet--full-height\">\n                    <div class=\"m-portlet__head\">\n                        <div class=\"m-portlet__head-caption\">\n                            <div class=\"m-portlet__head-title\">\n                                <h3 class=\"m-portlet__head-text\">\n                                    Regional Stats\n                                </h3>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"m-portlet__body\">\n                        <div id=\"region_statistics_content\">\n                            <div class=\"table-responsive\">\n                                <!--begin::Table-->\n                                <table class=\"table\">\n                                    <!--begin::Thead-->\n                                    <thead>\n                                        <tr>\n                                            <td class=\"m-widget11__label\">#</td>\n                                            <td class=\"m-widget11__app\">Country</td>\n                                            <td class=\"m-widget11__sales\">Sales</td>\n                                            <td class=\"m-widget11__change\">Change</td>\n                                            <td class=\"m-widget11__price\">Avg Price</td>\n                                            <td class=\"m-widget11__total\">Total</td>\n                                        </tr>\n                                    </thead>\n                                    <!--end::Thead-->\n                                    <!--begin::Tbody-->\n                                    <tbody>\n                                        <tr *ngFor=\"let stat of regionalStatsTable.stats; let index = index\">\n                                            <td>\n                                                <label class=\"m-checkbox m-checkbox--solid m-checkbox--single m-checkbox--brand\">\n                                                    <input type=\"checkbox\"><span></span>\n                                                </label>\n                                            </td>\n                                            <td>{{stat.countryName}}</td>\n                                            <td>{{stat.sales | currency}}</td>\n                                            <td >\n                                                <div class=\"m-widget11__chart\" style=\"height:50px; width: 100px\">\n                                                    <iframe class=\"chartjs-hidden-iframe\" tabindex=\"-1\" style=\"display: block; overflow: hidden; border: 0px; margin: 0px; top: 0px; left: 0px; bottom: 0px; right: 0px; height: 100%; width: 100%; position: absolute; pointer-events: none; z-index: -1;\"></iframe>\n                                                    <canvas class=\"m_chart_sales_by_region\" style=\"display: block; width: 100px; height: 50px;\" width=\"100\" height=\"50\"></canvas>\n                                                </div>\n                                            </td>\n                                            <td>{{stat.averagePrice | currency}}</td>\n                                            <td>{{stat.totalPrice | currency}}</td>\n                                        </tr>\n                                    </tbody>\n                                </table>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\">\n            <div class=\"col-md-6 col-sm-12\">\n                <div class=\"m-portlet m-portlet--full-height \">\n                    <div class=\"m-portlet__head\">\n                        <div class=\"m-portlet__head-caption\">\n                            <div class=\"m-portlet__head-title\">\n                                <h3 class=\"m-portlet__head-text\">\n                                    General Stats\n                                </h3>\n                            </div>\n                        </div>\n                        <div class=\"m-portlet__head-tools\">\n                            <a href=\"javascript:;\" class=\"btn btn-primary\" (click)=\"generalStatsPieChart.reload()\">\n                                <i class=\"fa fa-repeat\"></i> Reload\n                            </a>\n                        </div>\n                    </div>\n                    <div class=\"m-portlet__body\">\n                        <div class=\"row\">\n                            <div class=\"col-md-4\">\n                                <div class=\"easy-pie-chart\">\n                                    <div class=\"number\">\n                                        <span>+{{generalStatsPieChart.transactionPercent.value}}%</span>\n                                        <easy-pie-chart [percent]=\"generalStatsPieChart.transactionPercent.value\"\n                                                        [options]=\"generalStatsPieChart.transactionPercent.options\">\n                                        </easy-pie-chart>\n                                    </div>\n                                    <a class=\"title\" href=\"javascript:;\">\n                                        Transactions\n                                        <i class=\"icon-arrow-right\"></i>\n                                    </a>\n                                </div>\n                            </div>\n                            <div class=\"margin-bottom-10 visible-sm\"> </div>\n                            <div class=\"col-md-4\">\n                                <div class=\"easy-pie-chart\">\n                                    <div class=\"number\">\n                                        <span>+{{generalStatsPieChart.newVisitPercent.value}}%</span>\n                                        <easy-pie-chart [percent]=\"generalStatsPieChart.newVisitPercent.value\"\n                                                        [options]=\"generalStatsPieChart.newVisitPercent.options\">\n                                        </easy-pie-chart>\n                                    </div>\n                                    <a class=\"title\" href=\"javascript:;\">\n                                        New Visits\n                                        <i class=\"icon-arrow-right\"></i>\n                                    </a>\n                                </div>\n                            </div>\n                            <div class=\"margin-bottom-10 visible-sm\"> </div>\n                            <div class=\"col-md-4\">\n                                <div class=\"easy-pie-chart\">\n                                    <div class=\"number\">\n                                        <span>+{{generalStatsPieChart.bouncePercent.value}}%</span>\n                                        <easy-pie-chart [percent]=\"generalStatsPieChart.bouncePercent.value\"\n                                                        [options]=\"generalStatsPieChart.bouncePercent.options\">\n                                        </easy-pie-chart>\n                                    </div>\n                                    <a class=\"title\" href=\"javascript:;\">\n                                        Bounce\n                                        <i class=\"icon-arrow-right\"></i>\n                                    </a>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-md-6 col-sm-12\">\n                <div class=\"m-portlet m-portlet--full-height \">\n                    <div class=\"m-portlet__head\">\n                        <div class=\"m-portlet__head-caption\">\n                            <div class=\"m-portlet__head-title\">\n                                <h3 class=\"m-portlet__head-text\">\n                                    Daily Sales\n                                </h3>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"m-portlet__body\">\n                        <div class=\"row\">\n                            <div class=\"col-md-12\">\n                                <canvas #m_chart_daily_sales id=\"m_chart_daily_sales\"></canvas>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"row\">\n            <div class=\"col-lg-6 col-xs-12 col-sm-12\">\n                <div class=\"m-portlet m-portlet--full-height \">\n                    <div class=\"m-portlet__head\">\n                        <div class=\"m-portlet__head-caption\">\n                            <div class=\"m-portlet__head-title\">\n                                <h3 class=\"m-portlet__head-text\">\n                                    Profit Share\n                                    <small>\n                                        Profit Share between customers\n                                    </small>\n                                </h3>\n                            </div>\n                        </div>\n                        <div class=\"m-portlet__head-tools\">\n                            <ul class=\"m-portlet__nav\">\n                                <li class=\"m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push\" data-dropdown-toggle=\"hover\" aria-expanded=\"true\">\n                                    <a href=\"javascript:;\" class=\"m-portlet__nav-link m-dropdown__toggle dropdown-toggle btn btn--sm m-btn--pill btn-secondary m-btn m-btn--label-brand\">\n                                        Actions\n                                    </a>\n                                    <div class=\"m-dropdown__wrapper\">\n                                        <span class=\"m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust\" style=\"left: auto; right: 40.5px;\"></span>\n                                        <div class=\"m-dropdown__inner\">\n                                            <div class=\"m-dropdown__body\">\n                                                <div class=\"m-dropdown__content\">\n                                                    <ul class=\"m-nav\">\n                                                        <li class=\"m-nav__item\">\n                                                            <a href=\"javascript:;\" class=\"m-nav__link\">\n                                                                <i class=\"m-nav__link-icon flaticon-share\"></i>\n                                                                <span class=\"m-nav__link-text\">\n                                                                    Action 1\n                                                                </span>\n                                                            </a>\n                                                        </li>\n                                                        <li class=\"m-nav__item\">\n                                                            <a href=\"javascript:;\" class=\"m-nav__link\">\n                                                                <i class=\"m-nav__link-icon flaticon-chat-1\"></i>\n                                                                <span class=\"m-nav__link-text\">\n                                                                    Action 2\n                                                                </span>\n                                                            </a>\n                                                        </li>\n                                                        <li class=\"m-nav__item\">\n                                                            <a href=\"javascript:;\" class=\"m-nav__link\">\n                                                                <i class=\"m-nav__link-icon flaticon-info\"></i>\n                                                                <span class=\"m-nav__link-text\">\n                                                                    Action 3\n                                                                </span>\n                                                            </a>\n                                                        </li>\n                                                        <li class=\"m-nav__item\">\n                                                            <a href=\"javascript:;\" class=\"m-nav__link\">\n                                                                <i class=\"m-nav__link-icon flaticon-lifebuoy\"></i>\n                                                                <span class=\"m-nav__link-text\">\n                                                                    Action 4\n                                                                </span>\n                                                            </a>\n                                                        </li>\n                                                    </ul>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </li>\n                            </ul>\n                        </div>\n                    </div>\n                    <div class=\"m-portlet__body\">\n                        <!--begin:: Widgets/Profit Share-->\n                        <div class=\"m-widget14\">\n                            <div class=\"row  align-items-center\">\n                                <div class=\"col\">\n                                    <div id=\"m_chart_profit_share\" class=\"m-widget14__chart\" style=\"height: 160px\">\n                                        <div class=\"m-widget14__stat\">\n                                            45\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col\">\n                                    <div class=\"m-widget14__legends\" *ngIf=\"profitSharePieChart.data\">\n                                        <div class=\"m-widget14__legend\">\n                                            <span class=\"m-widget14__legend-bullet m--bg-accent\"></span>\n                                            <span class=\"m-widget14__legend-text\">\n                                                {{profitSharePieChart.data[0]}}% Product Sales\n                                            </span>\n                                        </div>\n                                        <div class=\"m-widget14__legend\">\n                                            <span class=\"m-widget14__legend-bullet m--bg-warning\"></span>\n                                            <span class=\"m-widget14__legend-text\">\n                                                {{profitSharePieChart.data[1]}}% Online Courses\n                                            </span>\n                                        </div>\n                                        <div class=\"m-widget14__legend\">\n                                            <span class=\"m-widget14__legend-bullet m--bg-brand\"></span>\n                                            <span class=\"m-widget14__legend-text\">\n                                                {{profitSharePieChart.data[2]}}% Custom Development\n\n                                            </span>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <!--end:: Widgets/Profit Share-->\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-lg-6 col-xs-12 col-sm-12\">\n                <div class=\"m-portlet m-portlet--full-height \">\n                    <div class=\"m-portlet__head\">\n                        <div class=\"m-portlet__head-caption\">\n                            <div class=\"m-portlet__head-title\">\n                                <h3 class=\"m-portlet__head-text\">\n                                    Member Activity\n                                </h3>\n                            </div>\n                        </div>\n                        <div class=\"m-portlet__head-tools\">\n                            <button (click)=\"memberActivityTable.reload()\" class=\"btn btn-primary\"><i class=\"fa fa-refresh\"></i> Refresh</button>\n                        </div>\n                    </div>\n                    <div class=\"m-portlet__body\">\n                        <div class=\"table-scrollable table-scrollable-borderless\">\n                            <table class=\"table table-hover table-light\">\n                                <thead>\n                                    <tr class=\"uppercase\">\n                                        <th colspan=\"2\">\n                                            MEMBER\n                                        </th>\n                                        <th>\n                                            Earnings\n                                        </th>\n                                        <th>\n                                            CASES\n                                        </th>\n                                        <th>\n                                            CLOSED\n                                        </th>\n                                        <th>\n                                            RATE\n                                        </th>\n                                    </tr>\n                                </thead>\n                                <tr *ngFor=\"let m of memberActivityTable.memberActivities; let index = index\">\n                                    <td class=\"fit\">\n                                        <img class=\"m--img-rounded m--marginless m--img-centered small-profile-pic\" src=\"/assets/metronic/src/media/app/img/users/100_{{index + 1}}.jpg\">\n                                    </td>\n                                    <td>\n                                        <a href=\"javascript:;\" class=\"primary-link\">{{m.name}}</a>\n                                    </td>\n                                    <td>\n                                        {{m.earnings}}\n                                    </td>\n                                    <td>\n                                        {{m.cases}}\n                                    </td>\n                                    <td>\n                                        {{m.closed}}\n                                    </td>\n                                    <td>\n                                        <span class=\"bold font-green-haze\">{{m.rate}}</span>\n                                    </td>\n                                </tr>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n    </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/main/dashboard/dashboard.component.less":
+/*!*********************************************************!*\
+  !*** ./src/app/main/dashboard/dashboard.component.less ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "#TenantDashboard input[type=\"radio\"] {\n  display: none;\n}\n"
+
+/***/ }),
+
+/***/ "./src/app/main/dashboard/dashboard.component.ts":
+/*!*******************************************************!*\
+  !*** ./src/app/main/dashboard/dashboard.component.ts ***!
+  \*******************************************************/
+/*! exports provided: DashboardComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardComponent", function() { return DashboardComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _shared_AppEnums__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @shared/AppEnums */ "./src/shared/AppEnums.ts");
+/* harmony import */ var _shared_animations_routerTransition__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @shared/animations/routerTransition */ "./src/shared/animations/routerTransition.ts");
+/* harmony import */ var _shared_common_app_component_base__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @shared/common/app-component-base */ "./src/shared/common/app-component-base.ts");
+/* harmony import */ var _shared_service_proxies_service_proxies__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @shared/service-proxies/service-proxies */ "./src/shared/service-proxies/service-proxies.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+var DashboardComponent = /** @class */ (function (_super) {
+    __extends(DashboardComponent, _super);
+    function DashboardComponent(injector, _dashboardService) {
+        var _this = _super.call(this, injector) || this;
+        _this._dashboardService = _dashboardService;
+        _this.appSalesSummaryDateInterval = _shared_AppEnums__WEBPACK_IMPORTED_MODULE_1__["AppSalesSummaryDatePeriod"];
+        _this.selectedSalesSummaryDatePeriod = _shared_AppEnums__WEBPACK_IMPORTED_MODULE_1__["AppSalesSummaryDatePeriod"].Daily;
+        _this.dashboardHeaderStats = new DashboardHeaderStats();
+        _this.salesSummaryChart = new SalesSummaryChart(_this._dashboardService, 'salesStatistics');
+        _this.regionalStatsTable = new RegionalStatsTable(_this._dashboardService);
+        _this.generalStatsPieChart = new GeneralStatsPieChart(_this._dashboardService);
+        _this.dailySalesLineChart = new DailySalesLineChart(_this._dashboardService, '#m_chart_daily_sales');
+        _this.profitSharePieChart = new ProfitSharePieChart(_this._dashboardService, '#m_chart_profit_share');
+        _this.memberActivityTable = new MemberActivityTable(_this._dashboardService);
+        return _this;
+    }
+    DashboardComponent.prototype.getDashboardStatisticsData = function (datePeriod) {
+        var _this = this;
+        this.salesSummaryChart.showLoading();
+        this.generalStatsPieChart.showLoading();
+        this._dashboardService
+            .getDashboardData(datePeriod)
+            .subscribe(function (result) {
+            _this.dashboardHeaderStats.init(result.totalProfit, result.newFeedbacks, result.newOrders, result.newUsers);
+            _this.generalStatsPieChart.init(result.transactionPercent, result.newVisitPercent, result.bouncePercent);
+            _this.dailySalesLineChart.init(result.dailySales);
+            _this.profitSharePieChart.init(result.profitShares);
+            _this.salesSummaryChart.init(result.salesSummary, result.totalSales, result.revenue, result.expenses, result.growth);
+        });
+    };
+    DashboardComponent.prototype.ngAfterViewInit = function () {
+        this.getDashboardStatisticsData(_shared_AppEnums__WEBPACK_IMPORTED_MODULE_1__["AppSalesSummaryDatePeriod"].Daily);
+        this.regionalStatsTable.init();
+        this.memberActivityTable.init();
+    };
+    DashboardComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            template: __webpack_require__(/*! ./dashboard.component.html */ "./src/app/main/dashboard/dashboard.component.html"),
+            styles: [__webpack_require__(/*! ./dashboard.component.less */ "./src/app/main/dashboard/dashboard.component.less")],
+            encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewEncapsulation"].None,
+            animations: [Object(_shared_animations_routerTransition__WEBPACK_IMPORTED_MODULE_2__["appModuleAnimation"])()]
+        }),
+        __metadata("design:paramtypes", [_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injector"],
+            _shared_service_proxies_service_proxies__WEBPACK_IMPORTED_MODULE_4__["TenantDashboardServiceProxy"]])
+    ], DashboardComponent);
+    return DashboardComponent;
+}(_shared_common_app_component_base__WEBPACK_IMPORTED_MODULE_3__["AppComponentBase"]));
+
+var DashboardChartBase = /** @class */ (function () {
+    function DashboardChartBase() {
+        this.loading = true;
+    }
+    DashboardChartBase.prototype.showLoading = function () {
+        var _this = this;
+        setTimeout(function () { _this.loading = true; });
+    };
+    DashboardChartBase.prototype.hideLoading = function () {
+        var _this = this;
+        setTimeout(function () { _this.loading = false; });
+    };
+    return DashboardChartBase;
+}());
+var SalesSummaryChart = /** @class */ (function (_super) {
+    __extends(SalesSummaryChart, _super);
+    function SalesSummaryChart(_dashboardService, _containerElement) {
+        var _this = _super.call(this) || this;
+        _this._dashboardService = _dashboardService;
+        _this._containerElement = _containerElement;
+        _this.totalSales = 0;
+        _this.totalSalesCounter = 0;
+        _this.revenue = 0;
+        _this.revenuesCounter = 0;
+        _this.expenses = 0;
+        _this.expensesCounter = 0;
+        _this.growth = 0;
+        _this.growthCounter = 0;
+        return _this;
+    }
+    SalesSummaryChart.prototype.init = function (salesSummaryData, totalSales, revenue, expenses, growth) {
+        this.instance = Morris.Area({
+            element: this._containerElement,
+            padding: 0,
+            behaveLikeLine: false,
+            gridEnabled: false,
+            gridLineColor: 'transparent',
+            axes: false,
+            fillOpacity: 1,
+            data: salesSummaryData,
+            lineColors: ['#399a8c', '#92e9dc'],
+            xkey: 'period',
+            ykeys: ['sales', 'profit'],
+            labels: ['Sales', 'Profit'],
+            pointSize: 0,
+            lineWidth: 0,
+            hideHover: 'auto',
+            resize: true
+        });
+        this.totalSales = totalSales;
+        this.totalSalesCounter = totalSales;
+        this.revenue = revenue;
+        this.expenses = expenses;
+        this.growth = growth;
+        this.hideLoading();
+    };
+    SalesSummaryChart.prototype.reload = function (datePeriod) {
+        var _this = this;
+        this.showLoading();
+        this._dashboardService
+            .getSalesSummary(datePeriod)
+            .subscribe(function (result) {
+            _this.instance.setData(result.salesSummary, true);
+            _this.hideLoading();
+        });
+    };
+    return SalesSummaryChart;
+}(DashboardChartBase));
+var RegionalStatsTable = /** @class */ (function (_super) {
+    __extends(RegionalStatsTable, _super);
+    function RegionalStatsTable(_dashboardService) {
+        var _this = _super.call(this) || this;
+        _this._dashboardService = _dashboardService;
+        return _this;
+    }
+    RegionalStatsTable.prototype.init = function () {
+        this.reload();
+    };
+    RegionalStatsTable.prototype._initSparklineChart = function (src, data, color, border) {
+        if (src.length === 0) {
+            return;
+        }
+        var config = {
+            type: 'line',
+            data: {
+                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October"],
+                datasets: [{
+                        label: "",
+                        borderColor: color,
+                        borderWidth: border,
+                        pointHoverRadius: 4,
+                        pointHoverBorderWidth: 12,
+                        pointBackgroundColor: Chart.helpers.color('#000000').alpha(0).rgbString(),
+                        pointBorderColor: Chart.helpers.color('#000000').alpha(0).rgbString(),
+                        pointHoverBackgroundColor: mUtil.getColor('danger'),
+                        pointHoverBorderColor: Chart.helpers.color('#000000').alpha(0.1).rgbString(),
+                        fill: false,
+                        data: data,
+                    }]
+            },
+            options: {
+                title: {
+                    display: false,
+                },
+                tooltips: {
+                    enabled: false,
+                    intersect: false,
+                    mode: 'nearest',
+                    xPadding: 10,
+                    yPadding: 10,
+                    caretPadding: 10
+                },
+                legend: {
+                    display: false,
+                    labels: {
+                        usePointStyle: false
+                    }
+                },
+                responsive: true,
+                maintainAspectRatio: true,
+                hover: {
+                    mode: 'index'
+                },
+                scales: {
+                    xAxes: [{
+                            display: false,
+                            gridLines: false,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Month'
+                            }
+                        }],
+                    yAxes: [{
+                            display: false,
+                            gridLines: false,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            },
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                },
+                elements: {
+                    point: {
+                        radius: 4,
+                        borderWidth: 12
+                    },
+                },
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 10,
+                        top: 5,
+                        bottom: 0
+                    }
+                }
+            }
+        };
+        return new Chart(src, config);
+    };
+    RegionalStatsTable.prototype.reload = function () {
+        var _this = this;
+        var self = this;
+        this.showLoading();
+        this._dashboardService
+            .getRegionalStats({})
+            .subscribe(function (result) {
+            _this.stats = result.stats;
+            _this.hideLoading();
+            var colors = ['accent', 'danger', 'success', 'warning'];
+            setTimeout(function () {
+                var $canvasItems = $('canvas.m_chart_sales_by_region');
+                for (var i = 0; i < $canvasItems.length; i++) {
+                    var $canvas = $canvasItems[i];
+                    self._initSparklineChart($canvas, _this.stats[i].change, mUtil.getColor(colors[i % 4]), 2);
+                }
+            });
+        });
+    };
+    return RegionalStatsTable;
+}(DashboardChartBase));
+var GeneralStatsPieChart = /** @class */ (function (_super) {
+    __extends(GeneralStatsPieChart, _super);
+    function GeneralStatsPieChart(_dashboardService) {
+        var _this = _super.call(this) || this;
+        _this._dashboardService = _dashboardService;
+        //General stats =>  EasyPieChart: https://rendro.github.io/easy-pie-chart/
+        _this.transactionPercent = {
+            value: 0,
+            options: {
+                barColor: '#F8CB00',
+                trackColor: '#f9f9f9',
+                scaleColor: '#dfe0e0',
+                scaleLength: 5,
+                lineCap: 'round',
+                lineWidth: 3,
+                size: 75,
+                rotate: 0,
+                animate: {
+                    duration: 1000,
+                    enabled: true
+                }
+            }
+        };
+        _this.newVisitPercent = {
+            value: 0,
+            options: {
+                barColor: '#1bbc9b',
+                trackColor: '#f9f9f9',
+                scaleColor: '#dfe0e0',
+                scaleLength: 5,
+                lineCap: 'round',
+                lineWidth: 3,
+                size: 75,
+                rotate: 0,
+                animate: {
+                    duration: 1000,
+                    enabled: true
+                }
+            }
+        };
+        _this.bouncePercent = {
+            value: 0,
+            options: {
+                barColor: '#F3565D',
+                trackColor: '#f9f9f9',
+                scaleColor: '#dfe0e0',
+                scaleLength: 5,
+                lineCap: 'round',
+                lineWidth: 3,
+                size: 75,
+                rotate: 0,
+                animate: {
+                    duration: 1000,
+                    enabled: true
+                }
+            }
+        };
+        return _this;
+    }
+    GeneralStatsPieChart.prototype.init = function (transactionPercent, newVisitPercent, bouncePercent) {
+        this.transactionPercent.value = transactionPercent;
+        this.newVisitPercent.value = newVisitPercent;
+        this.bouncePercent.value = bouncePercent;
+        this.hideLoading();
+    };
+    GeneralStatsPieChart.prototype.reload = function () {
+        var _this = this;
+        this.showLoading();
+        this._dashboardService
+            .getGeneralStats({})
+            .subscribe(function (result) {
+            _this.init(result.transactionPercent, result.newVisitPercent, result.bouncePercent);
+        });
+    };
+    return GeneralStatsPieChart;
+}(DashboardChartBase));
+var DailySalesLineChart = /** @class */ (function (_super) {
+    __extends(DailySalesLineChart, _super);
+    function DailySalesLineChart(_dashboardService, canvasId) {
+        var _this = _super.call(this) || this;
+        _this._dashboardService = _dashboardService;
+        _this._canvasId = canvasId;
+        return _this;
+    }
+    DailySalesLineChart.prototype.init = function (data) {
+        var dayLabels = [];
+        for (var day = 1; day <= data.length; day++) {
+            dayLabels.push('Day ' + day);
+        }
+        var chartData = {
+            labels: dayLabels,
+            datasets: [{
+                    //label: 'Dataset 1',
+                    backgroundColor: mUtil.getColor('success'),
+                    data: data
+                }, {
+                    //label: 'Dataset 2',
+                    backgroundColor: '#f3f3fb',
+                    data: data
+                }]
+        };
+        var chartContainer = $(this._canvasId);
+        if (chartContainer.length === 0) {
+            return;
+        }
+        var chart = new Chart(chartContainer, {
+            type: 'bar',
+            data: chartData,
+            options: {
+                title: {
+                    display: false,
+                },
+                tooltips: {
+                    intersect: false,
+                    mode: 'nearest',
+                    xPadding: 10,
+                    yPadding: 10,
+                    caretPadding: 10
+                },
+                legend: {
+                    display: false
+                },
+                responsive: true,
+                maintainAspectRatio: false,
+                barRadius: 4,
+                scales: {
+                    xAxes: [{
+                            display: false,
+                            gridLines: false,
+                            stacked: true
+                        }],
+                    yAxes: [{
+                            display: false,
+                            stacked: true,
+                            gridLines: false
+                        }]
+                },
+                layout: {
+                    padding: {
+                        left: 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0
+                    }
+                }
+            }
+        });
+        this.hideLoading();
+    };
+    DailySalesLineChart.prototype.reload = function () {
+        var _this = this;
+        this.showLoading();
+        this._dashboardService
+            .getSalesSummary(_shared_AppEnums__WEBPACK_IMPORTED_MODULE_1__["AppSalesSummaryDatePeriod"].Monthly)
+            .subscribe(function (result) {
+            _this.init(result.salesSummary);
+            _this.hideLoading();
+        });
+    };
+    return DailySalesLineChart;
+}(DashboardChartBase));
+var ProfitSharePieChart = /** @class */ (function (_super) {
+    __extends(ProfitSharePieChart, _super);
+    function ProfitSharePieChart(_dashboardService, canvasId) {
+        var _this = _super.call(this) || this;
+        _this._dashboardService = _dashboardService;
+        _this._canvasId = canvasId;
+        return _this;
+    }
+    ProfitSharePieChart.prototype.init = function (data) {
+        this.data = data;
+        if ($(this._canvasId).length === 0) {
+            return;
+        }
+        var chart = new Chartist.Pie(this._canvasId, {
+            series: [{
+                    value: data[0],
+                    className: 'custom',
+                    meta: {
+                        color: mUtil.getColor('brand')
+                    }
+                },
+                {
+                    value: data[1],
+                    className: 'custom',
+                    meta: {
+                        color: mUtil.getColor('accent')
+                    }
+                },
+                {
+                    value: data[2],
+                    className: 'custom',
+                    meta: {
+                        color: mUtil.getColor('warning')
+                    }
+                }
+            ],
+            labels: [1, 2, 3]
+        }, {
+            donut: true,
+            donutWidth: 17,
+            showLabel: false
+        });
+        chart.on('draw', function (data) {
+            if (data.type === 'slice') {
+                // Get the total path length in order to use for dash array animation
+                var pathLength = data.element._node.getTotalLength();
+                // Set a dasharray that matches the path length as prerequisite to animate dashoffset
+                data.element.attr({
+                    'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
+                });
+                // Create animation definition while also assigning an ID to the animation for later sync usage
+                var animationDefinition = {
+                    'stroke-dashoffset': {
+                        id: 'anim' + data.index,
+                        dur: 1000,
+                        from: -pathLength + 'px',
+                        to: '0px',
+                        easing: Chartist.Svg.Easing.easeOutQuint,
+                        // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
+                        fill: 'freeze',
+                        'stroke': data.meta.color
+                    }
+                };
+                // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
+                if (data.index !== 0) {
+                    animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
+                }
+                // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
+                data.element.attr({
+                    'stroke-dashoffset': -pathLength + 'px',
+                    'stroke': data.meta.color
+                });
+                // We can't use guided mode as the animations need to rely on setting begin manually
+                // See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
+                data.element.animate(animationDefinition, false);
+            }
+        });
+        this.hideLoading();
+    };
+    return ProfitSharePieChart;
+}(DashboardChartBase));
+var DashboardHeaderStats = /** @class */ (function (_super) {
+    __extends(DashboardHeaderStats, _super);
+    function DashboardHeaderStats() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.totalProfit = 0;
+        _this.totalProfitCounter = 0;
+        _this.newFeedbacks = 0;
+        _this.newFeedbacksCounter = 0;
+        _this.newOrders = 0;
+        _this.newOrdersCounter = 0;
+        _this.newUsers = 0;
+        _this.newUsersCounter = 0;
+        _this.totalProfitChange = 76;
+        _this.totalProfitChangeCounter = 0;
+        _this.newFeedbacksChange = 85;
+        _this.newFeedbacksChangeCounter = 0;
+        _this.newOrdersChange = 45;
+        _this.newOrdersChangeCounter = 0;
+        _this.newUsersChange = 57;
+        _this.newUsersChangeCounter = 0;
+        return _this;
+    }
+    DashboardHeaderStats.prototype.init = function (totalProfit, newFeedbacks, newOrders, newUsers) {
+        this.totalProfit = totalProfit;
+        this.newFeedbacks = newFeedbacks;
+        this.newOrders = newOrders;
+        this.newUsers = newUsers;
+        this.hideLoading();
+    };
+    return DashboardHeaderStats;
+}(DashboardChartBase));
+var MemberActivityTable = /** @class */ (function (_super) {
+    __extends(MemberActivityTable, _super);
+    function MemberActivityTable(_dashboardService) {
+        var _this = _super.call(this) || this;
+        _this._dashboardService = _dashboardService;
+        return _this;
+    }
+    MemberActivityTable.prototype.init = function () {
+        this.reload();
+    };
+    MemberActivityTable.prototype.reload = function () {
+        var _this = this;
+        this.showLoading();
+        this._dashboardService
+            .getMemberActivity()
+            .subscribe(function (result) {
+            _this.memberActivities = result.memberActivities;
+            _this.hideLoading();
+        });
+    };
+    return MemberActivityTable;
+}(DashboardChartBase));
+
+
+/***/ }),
+
+/***/ "./src/app/main/main-routing.module.ts":
+/*!*********************************************!*\
+  !*** ./src/app/main/main-routing.module.ts ***!
+  \*********************************************/
+/*! exports provided: MainRoutingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MainRoutingModule", function() { return MainRoutingModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./dashboard/dashboard.component */ "./src/app/main/dashboard/dashboard.component.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+var MainRoutingModule = /** @class */ (function () {
+    function MainRoutingModule() {
+    }
+    MainRoutingModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"])({
+            imports: [
+                _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"].forChild([
+                    {
+                        path: '',
+                        children: [
+                            { path: 'dashboard', component: _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_2__["DashboardComponent"], data: { permission: 'Pages.Tenant.Dashboard' } }
+                        ]
+                    }
+                ])
+            ],
+            exports: [
+                _angular_router__WEBPACK_IMPORTED_MODULE_1__["RouterModule"]
+            ]
+        })
+    ], MainRoutingModule);
+    return MainRoutingModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/main/main.module.ts":
+/*!*************************************!*\
+  !*** ./src/app/main/main.module.ts ***!
+  \*************************************/
+/*! exports provided: MainModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MainModule", function() { return MainModule; });
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _app_shared_common_app_common_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @app/shared/common/app-common.module */ "./src/app/shared/common/app-common.module.ts");
+/* harmony import */ var _shared_utils_utils_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @shared/utils/utils.module */ "./src/shared/utils/utils.module.ts");
+/* harmony import */ var angular2_counto__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! angular2-counto */ "./node_modules/angular2-counto/index.js");
+/* harmony import */ var angular2_counto__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(angular2_counto__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var ng2modules_easypiechart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng2modules-easypiechart */ "./node_modules/ng2modules-easypiechart/index.js");
+/* harmony import */ var ng2modules_easypiechart__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(ng2modules_easypiechart__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-bootstrap */ "./node_modules/ngx-bootstrap/index.js");
+/* harmony import */ var _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./dashboard/dashboard.component */ "./src/app/main/dashboard/dashboard.component.ts");
+/* harmony import */ var _main_routing_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./main-routing.module */ "./src/app/main/main-routing.module.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+
+
+
+
+
+
+
+
+
+var MainModule = /** @class */ (function () {
+    function MainModule() {
+    }
+    MainModule = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+            imports: [
+                _angular_common__WEBPACK_IMPORTED_MODULE_0__["CommonModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
+                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["ModalModule"],
+                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["TabsModule"],
+                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_7__["TooltipModule"],
+                _app_shared_common_app_common_module__WEBPACK_IMPORTED_MODULE_3__["AppCommonModule"],
+                _shared_utils_utils_module__WEBPACK_IMPORTED_MODULE_4__["UtilsModule"],
+                _main_routing_module__WEBPACK_IMPORTED_MODULE_9__["MainRoutingModule"],
+                angular2_counto__WEBPACK_IMPORTED_MODULE_5__["CountoModule"],
+                ng2modules_easypiechart__WEBPACK_IMPORTED_MODULE_6__["EasyPieChartModule"]
+            ],
+            declarations: [
+                _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_8__["DashboardComponent"]
+            ]
+        })
+    ], MainModule);
+    return MainModule;
+}());
+
+
+
+/***/ })
+
+}]);
+//# sourceMappingURL=app-main-main-module.js.map

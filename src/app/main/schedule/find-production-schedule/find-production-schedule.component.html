@@ -1,0 +1,190 @@
+<div [@routerTransition]>
+    <div class="m-subheader ">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto col-sm-6">
+                <h3 class="m-subheader__title m-subheader__title--separator">
+                    <span>{{l("生产进度查询")}}</span>
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body ">
+                <form class="m-form m-form--fit m-form--label-align-right row">
+                    <div class="form-group col-sm-6">
+                        <label for="createStartTime">{{l("创建时间(开始)")}} *</label>
+                        <input id="createStartTime" class="form-control" type="datetime-local" name="createStartTime" [(ngModel)]="startDate" required>
+                    </div>
+                    <div class=" form-group col-sm-6">
+                        <label for="createEndTime">{{l("创建时间(结束)")}} *</label>
+                        <input id="createEndTime" class="form-control" type="datetime-local" name="createEndTime" [(ngModel)]="endDate" required>
+                        <span class="input-group-addon glyphicon glyphicon-search"></span>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="groupName">{{l("组别名称")}} *</label>
+                        <!--  -->
+                        <select #groupName name="groupName" class="form-control" [(ngModel)]="selectedGroupCode" [attr.data-live-search]="true" required>
+                            <option [value]=""></option>
+                            <option *ngFor="let company of companies" [value]="company.groupCode">{{company.groupName}}</option>
+                        </select>
+                        <!--  -->
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="submit">{{l("不选组别默认查询快递")}} </label><br>
+                        <button id="submit" type="submit" class="btn btn-info input-lg" (click)="searchLk()">{{l("Submit")}}</button>
+                    </div>
+                </form>
+                <!-- <p>{{startDate }} {{endDate }}</p> -->
+            </div>
+
+            <hr>
+            <!-- for example -->
+            <div class="table-responsive  text-center">
+                <!-- company -->
+                <h5 class="m-link m--font-boldest" *ngIf="datas.length>0">{{dataCaption[0]}}</h5>
+                <table class="table table-bordered m-table m-table--border-brand m-table--head-bg-brand table-hover" *ngIf="datas.length>0">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>订单池</th>
+                            <th>拣货中</th>
+                            <th>拣货完成</th>
+                            <th>已完成(Total)</th>
+                            <th>未完成(Total)</th>
+                            <th>合计(Total)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let c of datas">
+                            <td>{{c.name}}</td>
+                            <td>{{c.pool}}</td>
+                            <td>{{c.picking}}</td>
+                            <td>{{c.PickComplete}}</td>
+                            <td>{{c.productComplete}}</td>
+                            <td>{{c.unfinished}}</td>
+                            <td>{{c.total}}</td>
+                        </tr>
+                        <tr class="total">
+                            <td>{{totalDatas.name}}</td>
+                            <td>{{totalDatas.pool}}</td>
+                            <td>{{totalDatas.picking}}</td>
+                            <td>{{totalDatas.PickComplete}}</td>
+                            <td>{{totalDatas.productComplete}}</td>
+                            <td>{{totalDatas.unfinished}}</td>
+                            <td>{{totalDatas.total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- caiier01 LK01 -->
+                <h5 class="m-link m--font-boldest" *ngIf="carriLK01Datas.length>0">{{dataCaption[1]}}</h5>
+                <table class="table table-bordered m-table m-table--border-brand m-table--head-bg-brand table-hover" *ngIf="carriLK01Datas.length>0">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>订单池</th>
+                            <th>拣货中</th>
+                            <th>拣货完成</th>
+                            <th>已完成(Total)</th>
+                            <th>未完成(Total)</th>
+                            <th>合计(Total)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let c of carriLK01Datas">
+                            <td>{{c.name}}</td>
+                            <td>{{c.pool}}</td>
+                            <td>{{c.picking}}</td>
+                            <td>{{c.PickComplete}}</td>
+                            <td>{{c.productComplete}}</td>
+                            <td>{{c.unfinished}}</td>
+                            <td>{{c.total}}</td>
+                        </tr>
+                        <tr class="total">
+                            <td>{{carriTotalLK01Datas.name}}</td>
+                            <td>{{carriTotalLK01Datas.pool}}</td>
+                            <td>{{carriTotalLK01Datas.picking}}</td>
+                            <td>{{carriTotalLK01Datas.PickComplete}}</td>
+                            <td>{{carriTotalLK01Datas.productComplete}}</td>
+                            <td>{{carriTotalLK01Datas.unfinished}}</td>
+                            <td>{{carriTotalLK01Datas.total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- caiier02 LK02 -->
+                <h5 class="m-link m--font-boldest" *ngIf="carriLK02Datas.length>0">{{dataCaption[2]}}</h5>
+                <table class="table table-bordered m-table m-table--border-brand m-table--head-bg-brand table-hover" *ngIf="carriLK02Datas.length>0">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>订单池</th>
+                            <th>拣货中</th>
+                            <th>拣货完成</th>
+                            <th>已完成(Total)</th>
+                            <th>未完成(Total)</th>
+                            <th>合计(Total)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let c of carriLK02Datas">
+                            <td>{{c.name}}</td>
+                            <td>{{c.pool}}</td>
+                            <td>{{c.picking}}</td>
+                            <td>{{c.PickComplete}}</td>
+                            <td>{{c.productComplete}}</td>
+                            <td>{{c.unfinished}}</td>
+                            <td>{{c.total}}</td>
+                        </tr>
+                        <tr class="total">
+                            <td>{{carriTotalLK02Datas.name}}</td>
+                            <td>{{carriTotalLK02Datas.pool}}</td>
+                            <td>{{carriTotalLK02Datas.picking}}</td>
+                            <td>{{carriTotalLK02Datas.PickComplete}}</td>
+                            <td>{{carriTotalLK02Datas.productComplete}}</td>
+                            <td>{{carriTotalLK02Datas.unfinished}}</td>
+                            <td>{{carriTotalLK02Datas.total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- caiier02 CS01 -->
+                <h5 class="m-link m--font-boldest" *ngIf="carriCS01Datas.length>0">{{dataCaption[3]}}</h5>
+                <table class="table table-bordered m-table m-table--border-brand m-table--head-bg-brand table-hover" *ngIf="carriCS01Datas.length>0">
+                    <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>订单池</th>
+                            <th>拣货中</th>
+                            <th>拣货完成</th>
+                            <th>已完成(Total)</th>
+                            <th>未完成(Total)</th>
+                            <th>合计(Total)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let c of carriCS01Datas">
+                            <td>{{c.name}}</td>
+                            <td>{{c.pool}}</td>
+                            <td>{{c.picking}}</td>
+                            <td>{{c.PickComplete}}</td>
+                            <td>{{c.productComplete}}</td>
+                            <td>{{c.unfinished}}</td>
+                            <td>{{c.total}}</td>
+                        </tr>
+                        <tr class="total">
+                            <td>{{carriTotalCS01Datas.name}}</td>
+                            <td>{{carriTotalCS01Datas.pool}}</td>
+                            <td>{{carriTotalCS01Datas.picking}}</td>
+                            <td>{{carriTotalCS01Datas.PickComplete}}</td>
+                            <td>{{carriTotalCS01Datas.productComplete}}</td>
+                            <td>{{carriTotalCS01Datas.unfinished}}</td>
+                            <td>{{carriTotalCS01Datas.total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

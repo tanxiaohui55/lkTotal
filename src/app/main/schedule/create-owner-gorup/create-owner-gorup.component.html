@@ -1,0 +1,133 @@
+<div [@routerTransition]>
+    <div class="m-subheader ">
+        <div class="d-flex align-items-center">
+            <div class="mr-auto col-sm-6">
+                <h3 class="m-subheader__title m-subheader__title--separator">
+                    <span>{{l("创建货主分组")}}</span>
+                </h3>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="m-content">
+        <div class="m-portlet m-portlet--mobile">
+            <div class="m-portlet__body">
+                <form class="formGroup">
+                    <div class="row">
+                        <div class="form-group col-sm-5">
+                            <!-- <label for="groupCode">新增组别编码</label> -->
+                            <input id="groupCode" name="groupCode" type="text" class="form-control" [(ngModel)]="ownerGroup.groupCode" placeholder="新增组别编码">
+                        </div>
+                        <div class="form-group col-sm-5">
+                            <!-- <label for="groupName">新增组别名称</label> -->
+                            <input id="groupName" name="groupName" type="text" class="form-control" [(ngModel)]="ownerGroup.groupName" placeholder="新增组别名称">
+                        </div>
+                        <div class="form-group col-sm-2 right">
+                            <button id="add" class="btn btn-info" (click)="addOwnerGroup()"> 添加</button>
+                            <button id="add" class="btn btn-primary" (click)="refresh()"> 刷新</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!--  -->
+
+
+                <div class="m-portlet__body">
+                    <!--begin: Datatable -->
+                    <div id="m_table_1_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table (onLazyLoad)="getOwnerGroup($event)" class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline" id="m_table_1" role="grid" aria-describedby="m_table_1_info">
+                                    <thead>
+                                        <tr role="row">
+                                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Actions">{{l('Actions')}}</th>
+                                            <th class="sorting_asc" aria-controls="m_table_1" rowspan="1" colspan="1" aria-sort="ascending">组别编码
+                                            </th>
+                                            <th class="sorting" aria-controls="m_table_1" rowspan="1" colspan="1">组别名称
+                                            </th>
+                                            <th aria-controls="m_table_1" rowspan="1" colspan="1">组别项目
+                                            </th>
+                                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Actions">{{l('Actions')}}</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr role="row" class="odd" *ngFor="let o of tableData">
+                                            <td style="width: 70px">
+                                                <div class="btn-group dropdown" normalizePosition>
+                                                    <button class="dropdown-toggle btn btn-sm btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-cog"></i><span class="caret"></span>
+                                                        {{l("Actions")}}
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <a (click)="openAddDialog(o.ownerGroup)">{{l('添加商家')}}</a>
+                                                        </li>
+                                                        <li>
+                                                            <a (click)="openRemoveDialog(o.ownerGroup)">{{l('移除商家')}}</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                            <td style="width:80px" class="sorting_1">
+                                                <div>
+                                                    {{o.ownerGroup.groupCode}}
+                                                </div>
+                                            </td>
+                                            <td style="width:120px">
+                                                <div>
+                                                    {{o.ownerGroup.groupName}}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <span *ngFor=" let i of o.ownerGroup.ownerGroupMembers">
+                                                        {{ i.ownerCode}}，
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td style="width: 130px">
+                                                <a (click)="editGroup(o.ownerGroup)" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="View">
+                                                    <i class="la la-edit"></i>
+                                                </a>
+                                                <a (click)="deleteGroup(o.ownerGroup)" class="m-portlet__nav-link btn m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill" title="View">
+                                                    <i class="la la-trash-o"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="m_table_1_info" role="status" aria-live="polite">Showing 1 to 10 of 50 entries</div>
+                            </div>
+                            <div class="col-sm-12 col-md-7">
+                                <div class="dataTables_paginate paging_simple_numbers" id="m_table_1_paginate">
+                                    <ul class="pagination">
+                                        <li class="paginate_button page-item previous disabled" id="m_table_1_previous"><a href="#" aria-controls="m_table_1" data-dt-idx="0" tabindex="0" class="page-link"><i
+                                                    class="la la-angle-left"></i></a></li>
+                                        <li class="paginate_button page-item active"><a href="#" aria-controls="m_table_1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="m_table_1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="m_table_1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="m_table_1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
+                                        <li class="paginate_button page-item "><a href="#" aria-controls="m_table_1" data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
+                                        <li class="paginate_button page-item next" id="m_table_1_next"><a href="#" aria-controls="m_table_1" data-dt-idx="6" tabindex="0" class="page-link"><i
+                                                    class="la la-angle-right"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+        </div>
+    </div>
+
+    <app-add-memenber #addMember (saveResult)="sucess($event)"></app-add-memenber>
+    <app-remove-memenber #removeMember (saveResult)="sucess($event)"></app-remove-memenber>
+
+</div>

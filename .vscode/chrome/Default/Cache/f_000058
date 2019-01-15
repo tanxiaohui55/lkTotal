@@ -1,0 +1,518 @@
+(function(abp){
+
+    abp.multiTenancy = abp.multiTenancy || {};
+    abp.multiTenancy.isEnabled = false;
+
+})(abp);
+
+(function(){
+
+    abp.session = abp.session || {};
+    abp.session.userId = null;
+    abp.session.tenantId = 1;
+    abp.session.impersonatorUserId = null;
+    abp.session.impersonatorTenantId = 1;
+    abp.session.multiTenancySide = 1;
+
+})();
+
+(function(){
+
+    abp.localization = abp.localization || {};
+
+    abp.localization.currentCulture = {
+        name: 'zh-CN',
+        displayName: 'Chinese (Simplified, PRC)'
+    };
+
+    abp.localization.languages = [{
+        name: 'en',
+        displayName: 'English',
+        icon: 'famfamfam-flag-gb',
+        isDisabled: false,
+        isDefault: true
+    }];
+
+    abp.localization.currentLanguage = {
+        name: 'en',
+        displayName: 'English',
+        icon: 'famfamfam-flag-gb',
+        isDisabled: false,
+        isDefault: true
+    };
+
+    abp.localization.sources = [
+        {
+            name: 'Abp',
+            type: 'DictionaryBasedLocalizationSource'
+        },
+        {
+            name: 'AbpWeb',
+            type: 'DictionaryBasedLocalizationSource'
+        },
+        {
+            name: 'AbpZero',
+            type: 'DictionaryBasedLocalizationSource'
+        },
+        {
+            name: 'WebSite',
+            type: 'DictionaryBasedLocalizationSource'
+        }
+    ];
+
+    abp.localization.values = abp.localization.values || {};
+
+    abp.localization.values['Abp'] = {
+  "AllOfThesePermissionsMustBeGranted": "您没有权限进行此操作,您需要以下权限: {0}",
+  "AtLeastOneOfThesePermissionsMustBeGranted": "您没有权限进行此操作,您至少需要下列权限的其中一项: {0}",
+  "CurrentUserDidNotLoginToTheApplication": "当前用户没有登录到系统！",
+  "DefaultFromSenderDisplayName": "默认发件人名字",
+  "DefaultFromSenderEmailAddress": "默认发件人邮箱地址",
+  "DefaultLanguage": "预设语言",
+  "DomainName": "域名",
+  "MainMenu": "主菜单",
+  "Password": "密码",
+  "ReceiveNotifications": "接收通知",
+  "SmtpHost": "SMTP主机",
+  "SmtpPort": "SMTP端口",
+  "TimeZone": "时区",
+  "UseDefaultCredentials": "使用默认验证",
+  "Username": "用户名",
+  "UseSSL": "使用SSL"
+};
+
+    abp.localization.values['AbpWeb'] = {
+  "AreYouSure": "你确定吗?",
+  "Cancel": "取消",
+  "DefaultError": "An error has occurred!",
+  "DefaultError401": "You are not authenticated!",
+  "DefaultError403": "You are not authorized!",
+  "DefaultError404": "Resource not found!",
+  "DefaultErrorDetail": "Error detail not sent by server.",
+  "DefaultErrorDetail401": "You should be authenticated (sign in) in order to perform this operation.",
+  "DefaultErrorDetail403": "You are not allowed to perform this operation.",
+  "DefaultErrorDetail404": "The resource requested could not found on the server.",
+  "EntityNotFound": "There is no entity {0} with id = {1}!",
+  "InternalServerError": "对不起,在处理您的请求期间,产生了一个服务器内部错误!",
+  "ValidationError": "您的请求无效!",
+  "ValidationNarrativeTitle": "The following errors were detected during validation.",
+  "Yes": "确定"
+};
+
+    abp.localization.values['AbpZero'] = {
+  "CanNotDeleteAdminUser": "不能删除默认管理员{0}!",
+  "CanNotDeleteStaticRole": "不能删除系统预定义角色: {0}",
+  "CanNotRenameAdminUser": "不能重命名默认管理员的用户名 {0}",
+  "Email": "Email",
+  "EmailSecurityCodeBody": "Your security code is: {0}",
+  "EmailSecurityCodeSubject": "Security Code",
+  "Identity.DefaultError": "发生了一个未知的异常错误.",
+  "Identity.DuplicateEmail": "邮箱地址 '{0}' 已被占用.",
+  "Identity.DuplicateUserName": "名字{0}已被占用.",
+  "Identity.ExternalLoginExists": "已存在此外部登陆用户.",
+  "Identity.InvalidEmail": "邮箱地址 '{0}' 不符合要求.",
+  "Identity.InvalidToken": "无效的token.",
+  "Identity.InvalidUserName": "用户名{0}不符合要求, 只能包含字母和数字.",
+  "Identity.LockoutNotEnabled": "对此用户，不能启用锁定.",
+  "Identity.PasswordMismatch": "密码错误.",
+  "Identity.PasswordRequireDigit": "密码至少要包含一位数字 ('0'-'9').",
+  "Identity.PasswordRequireLower": "密码至少要包含一位小写字母 ('a'-'z').",
+  "Identity.PasswordRequireNonLetterOrDigit": "密码必须包含一位非字母特殊符号或数字.",
+  "Identity.PasswordRequireUpper": "密码至少要包含一位大写字母 ('A'-'Z').",
+  "Identity.PasswordTooShort": "密码至少要{0}位.",
+  "Identity.PropertyTooShort": "{0}不能为空.",
+  "Identity.RoleNotFound": "角色{0}不存在.",
+  "Identity.UserAlreadyHasPassword": "用户已设置密码.",
+  "Identity.UserAlreadyInRole": "用户已拥有此角色.",
+  "Identity.UserIdNotFound": "用户不存在.",
+  "Identity.UserNameNotFound": "用户 {0} 不存在.",
+  "Identity.UserNotInRole": "用户不包含此角色.",
+  "InvalidTenancyName": "租户名无效!",
+  "OrganizationUnitDuplicateDisplayNameWarning": "There is already an organization unit with name {0}. Two units with same name can not be created in same level.",
+  "RoleDisplayNameIsAlreadyTaken": "角色显示名称 {0}已被占用.",
+  "RoleNameIsAlreadyTaken": "角色名{0}已被占用.",
+  "Sms": "Sms",
+  "SmsSecurityCodeMessage": "Your security code is: {0}",
+  "TenancyNameIsAlreadyTaken": "租户名{0} 已被占用."
+};
+
+    abp.localization.values['WebSite'] = {
+  "{0}UserCannotBeDeleted": "{0} user can not be deleted.",
+  "AboutUs": "About us",
+  "AccountSettings": "Account settings",
+  "Actions": "Actions",
+  "ActivationMailSentMessage": "An e-mail activation link sent to your e-mail address. Please check your emails.",
+  "Active": "Active",
+  "AdditionalForumUsernames": "Additional Forum Usernames",
+  "AdminEmailAddress": "admin email",
+  "Administration": "Administration",
+  "AdminPassword": "admin password",
+  "AdminPasswordRepeat": "admin password (repeat)",
+  "AllowUsersToRegisterThemselves": "Allow users to register to the system.",
+  "AllowUsersToRegisterThemselves_Hint": "If you disable this, users will only be added by admin using user management page.",
+  "AreYouSure": "Are you sure?",
+  "Back": "Back",
+  "Cache": "Cache",
+  "CampaignDeleteWarningMessage": "{0} campaign will be deleted.",
+  "CampaignName": "Campaign Name",
+  "Campaigns": "Campaigns",
+  "CampaignsHeaderInfo": "Manage Campaigns",
+  "Cancel": "Cancel",
+  "CanNotChangeAdminUserName": "Can not change username of the admin.",
+  "CaptchaCanNotBeEmpty": "Security code can not be empty.",
+  "Captha_Hint": "Please enter the security code shown in the picture below:",
+  "ChangePassword": "Change password",
+  "ChangeProfilePicture": "Change profile picture",
+  "ChangingPermissions": "Changing permissions",
+  "ClearCache": "Clear Cache",
+  "Close": "Close",
+  "CompanyName": "Company Name",
+  "ConfirmationMailSentPleaseClickLinkInTheEmail": "A confirmation mail sent to {0}. Please click link in the email in order to confirm your mail address.",
+  "Copy": "Copy",
+  "CopyLink": "Copy Link",
+  "CreateAnAccount": "Create account",
+  "CreateNewCampaign": "Create New Campaign",
+  "CreateNewRole": "Create new role",
+  "CreateNewTenant": "Create new tenant",
+  "CreateNewUser": "Create new user",
+  "CreatingNewRole": "Creating new role",
+  "CreatingNewTenant": "Creating new tenant",
+  "CreatingNewUser": "Creating new user",
+  "CreationTime": "Creation time",
+  "CurrentPassword": "Current password",
+  "Dashboard": "Dashboard",
+  "DashboardDemo_Note_Info": "\r\n      In this demo, you can use the left menu to test fully functional user management, role management and setting pages.\r\n      This dashboard page is just for demonstration purposes, texts and datas are meaningless.\r\n      Almost all datas are hard-coded in the client side, except the small MEMBER ACTIVITY graphs.\r\n      When you click the REFRESH button, graph data is requested from server and server generates random data.\r\n    ",
+  "DashboardDemo_Note_Title": "Welcome to ASP.NET Zero startup project!",
+  "DashboardHeaderInfo": "statistics and reports",
+  "Date": "Date",
+  "Default": "Default",
+  "DefaultFromAddress": "Default from (sender) email address",
+  "DefaultFromDisplayName": "Default from (sender) display name",
+  "DefaultRole_Description": "Assign to new users as default.",
+  "Delete": "Delete",
+  "DeletingRole": "Deleting role",
+  "DeletingTenant": "Deleting tenant",
+  "DeletingUser": "Deleting user",
+  "Disable": "Disable",
+  "DiscountRequestDeleteWarningMessage": "Request of {0} will be deleted.",
+  "DiscountRequests": "Discount Requests",
+  "DiscountRequestsHeaderInfo": "Discount Requests",
+  "DomainName": "Domain name",
+  "DontYouHaveAnAccount": "Don't you have an account?",
+  "Download": "Download",
+  "DownloadDeleteWarningMessage": "Download will be deleted.",
+  "DownloadManagement": "Download Management",
+  "DownloadsOf": "Downloads of",
+  "Edit": "Edit",
+  "EditCampaign": "Edit Campaign",
+  "EditingRole": "Editing role",
+  "EditingTenant": "Editing tenant",
+  "EditingUser": "Editing user",
+  "EditRole": "Edit role",
+  "EditTenant": "Edit tenant",
+  "EditUser": "Edit user",
+  "EmailActivation": "Email activation",
+  "EmailActivation_ClickTheLinkBelowToVerifyYourEmail": "Please click the link below to verify your email address:",
+  "EmailActivation_Subject": "WebSite account email activation",
+  "EmailActivation_SubTitle": "This email is sent you to verify your email.",
+  "EmailActivation_Title": "Welcome to WebSite.",
+  "EmailAddress": "Email address",
+  "EmailConfirm": "Email confirm",
+  "EmailConfirmationRequiredForLogin": "Email confirmation required for login.",
+  "EmailSmtp": "Email (SMTP)",
+  "Enable": "Enable",
+  "Error": "Error!",
+  "ExportToExcel": "Export to excel",
+  "ForgotPassword": "Forgot password?",
+  "FormIsNotValidMessage": "Form is not valid. Please check and fix errors.",
+  "FrontendPages": "Frontend pages",
+  "General": "General",
+  "generateLicenseCode": "Generate License Code",
+  "GetLicenseCode": "Get License Code",
+  "GetLicenseCodeAndCopy": "Get License Code And Copy",
+  "GithubUserName": "Github Username",
+  "GoToApplication": "Go to application",
+  "HomePage": "Home page",
+  "ImportFromForum": "Import from forum",
+  "ImportUser": "Import user",
+  "IncorrectCaptchaAnswer": "Security code is not valid.",
+  "InvalidEmailAddress": "Invalid email address",
+  "InvalidEmailConfirmationCode": "Invalid email confirmation code",
+  "InvalidEmailConfirmationCode_Detail": "Please be sure you entered this page by clicking the link sent to your email. If this not solves the problem, you can re-try to request a new confirmation code.",
+  "InvalidFormMessage": "Your form is invalid. Please check and correct it.",
+  "InvalidPasswordResetCode": "Invalid password reset code",
+  "InvalidPasswordResetCode_Detail": "Please be sure you entered this page by clicking the link sent to your email. If this not solves the problem, you can re-try to request a new password reset link.",
+  "InvalidUserNameOrEmailAddress": "Invalid user name or email address",
+  "InvalidUserNameOrPassword": "Invalid user name or password",
+  "Invoices": "Invoices",
+  "IsDownloadDisabled": "Download Disabled",
+  "IsInTrialPeriod": "Is in trial period ?",
+  "LastLoginTime": "Last login time",
+  "License": "License",
+  "LicenseCode": "License Code",
+  "LicenseEndDate": "License end date",
+  "LicenseStartDate": "License start date",
+  "LicenseType": "License type",
+  "LogIn": "Log in",
+  "LoginFailed": "Login failed!",
+  "Logout": "Logout",
+  "MailSent": "Mail sent",
+  "Maintenance": "Maintenance",
+  "MaxDownloadLimit": "Maximum Download Limit",
+  "MaxUseCount": "Maximum Use Count",
+  "MySettings": "My settings",
+  "Name": "Name",
+  "NameSurname": "Name surname",
+  "NewPassword": "New password",
+  "NewPasswordRepeat": "New password (repeat)",
+  "NewRegisteredUsersIsActiveByDefault": "New registered users are active by default.",
+  "NewRegisteredUsersIsActiveByDefault_Hint": "If you disable this, new users will not be active (and can not login) until admin manually activate the account.",
+  "No": "No",
+  "OopsYouAreLost": "Oops! You're lost.",
+  "Pages": "Pages",
+  "Password": "Password",
+  "PasswordRepeat": "Password (repeat)",
+  "PasswordReset": "Password reset",
+  "PasswordResetEmail_ClickTheLinkBelowToResetYourPassword": "Please click the link below to reset your password:",
+  "PasswordResetEmail_Subject": "WebSite passwork reset",
+  "PasswordResetEmail_SubTitle": "This email is sent you to reset and re-create your password.",
+  "PasswordResetEmail_Title": "WebSite passwork reset.",
+  "PasswordResetMailSentMessage": "A password reset link sent to your e-mail address. Please check your emails.",
+  "Permissions": "Permissions",
+  "PersonalInformations": "Personal informations",
+  "PleaseEnterLoginInformation": "Please enter login information",
+  "PleaseEnterYourNewPassword": "Please enter your new password.",
+  "ProfilePicture_Change_Error": "Profil resminiz değiştirilemedi.",
+  "ProfilePicture_Change_Info": "You can select a JPG/JPEG file with a maximum 30KB size.",
+  "ProfilePicture_Warn_FileType": "You can only select JPG/JPEG file. Please select another file.",
+  "ProfilePicture_Warn_SizeLimit": "Picture size must be smalled than 30KB. Please select another file.",
+  "ProjectName": "Project Name",
+  "RememberMe": "Remember me",
+  "RequestedFileDoesNotExists": "Requested file does not exists!",
+  "Reset": "Reset",
+  "ResetPermissionsTooltip": "This button immediately resets user specific permission settings and saves changes. The user will only have permissions from assigned roles.",
+  "ResetSpecialPermissions": "Reset special permissions",
+  "ResetSuccessfully": "Reset successfully",
+  "RoleDeleteWarningMessage": "Role {0} will be deleted and unassigned from all assigned users.",
+  "RoleName": "Role name",
+  "RoleProperties": "Role properties",
+  "Roles": "Roles",
+  "RolesHeaderInfo": "Use roles to group permissions.",
+  "Save": "Save",
+  "SaveAll": "Save all",
+  "SavedSuccessfully": "Saved successfully.",
+  "SavingWithThreeDot": "Saving...",
+  "SearchWithThreeDot": "Search...",
+  "SelfUserRegistrationIsDisabledMessage": "You can not register to the system!",
+  "SelfUserRegistrationIsDisabledMessage_Detail": "Self user registration is disabled. Please contact to the system administrator to register.",
+  "Send": "Send",
+  "SendActivationEmail": "Send activation email.",
+  "sendEmail": "Send Email",
+  "SendEmailActivationLink_Information": "A link will be sent to your email to activate your email address. If you don't get an email within a few minutes, please re-try.",
+  "SendPasswordResetLink_Information": "A password reset link will be sent to your email to reset your password. If you don't get an email within a few minutes, please re-try.",
+  "SetRandomPassword": "Set random password.",
+  "Settings": "Settings",
+  "SettingsHeaderInfo": "Show and change application settings.",
+  "ShouldChangePasswordOnNextLogin": "Should change password on next login.",
+  "ShowDownloads": "Show Downloads",
+  "SignUp": "Sign up",
+  "SmtpHost": "SMTP host",
+  "SmtpPort": "SMTP port",
+  "Static": "Static",
+  "StaticRole_Tooltip": "Static roles can not be deleted.",
+  "Submit": "Submit",
+  "SuccessfullyCleared": "Successfully Cleared",
+  "SuccessfullyDeleted": "Successfully deleted.",
+  "SuccessfullyDisabled": "Successfully Disabled",
+  "SuccessfullyEnabled": "Successfully Enabled",
+  "SuccessfullyRegistered": "Successfully registered",
+  "SuccessfullySent": "Successfully Sent",
+  "Surname": "Surname",
+  "TenancyCodeName": "Tenancy code name",
+  "TenancyName": "Tenancy name",
+  "TenantDeleteWarningMessage": "Tenant {0} will be deleted.",
+  "TenantInformations": "Tenant informations",
+  "TenantIsNotActive": "Tenant {0} is not active.",
+  "TenantName": "Tenant name",
+  "TenantName_Regex_Description": "Tenant name must be at least 2 chars, starts with a letter and continue with letter, number, dash or underscore.",
+  "TenantNameCanNotBeEmpty": "Tenant name can not be empty",
+  "Tenants": "Tenants",
+  "TenantsHeaderInfo": "Manage your tenants.",
+  "ThereIsNoTenantDefinedWithName{0}": "There is no tenant defined with name {0}",
+  "ThisWebSiteRootAddress": "Web site root address",
+  "ThisWebSiteRootAddress_Hint": "It will be used when building links to this web site. It's needed for some tasks like building password reset links. Ex: http://mydomain.com/",
+  "UseCaptchaOnRegistration": "Use security image question (captcha) on registration.",
+  "UseDefaultCredentials": "Use default credentials",
+  "UserDeleteWarningMessage": "User {0} will be deleted.",
+  "UserEmailIsNotConfirmedAndCanNotLogin": "Your email address is not confirmed. Please check your email and click the email confirmation link to activate your account. If you did not receive activation email, click the 'email confirmation' to request a new email.",
+  "UserInformations": "User informations",
+  "UserIsNotActiveAndCanNotLogin": "User {0} is not active and can not log in.",
+  "UserManagement": "User management",
+  "UserName": "User name",
+  "UserNameOrEmail": "User name or email",
+  "Users": "Users",
+  "UsersHeaderInfo": "Manage users and permissions.",
+  "UseSsl": "Use SSL",
+  "WeCanNotFindThePage": "We can not find the page you're looking for.",
+  "WelcomePage_Info": "Welcome to the application. You can use the menu to start using the application. If you don't see any menu item, probably you don't have permission to see any page. Consider to ask system administration for permissions.",
+  "WelcomePage_Title": "Welcome!",
+  "Yes": "Yes",
+  "YesDelete": "Yes, delete!",
+  "YourAccountIsWaitingToBeActivatedByAdmin": "Your account is waiting to be activated by system admin.",
+  "YourEmailIsConfirmedMessage": "Your email address is successfully confirmed.",
+  "YourPasswordHasChangedSuccessfully": "Your password has changed successfully."
+};
+
+
+})();
+
+(function() {
+
+    abp.features = abp.features || {};
+
+    abp.features.allFeatures = {
+    };
+
+})();
+
+(function(){
+
+    abp.auth = abp.auth || {};
+
+    abp.auth.allPermissions = {
+        'FrontendPages': true,
+        'Pages': true,
+        'FrontendPages.Download': true,
+        'Pages.Administration': true,
+        'Pages.Administration.Roles': true,
+        'Pages.Administration.Roles.Create': true,
+        'Pages.Administration.Roles.Edit': true,
+        'Pages.Administration.Roles.Delete': true,
+        'Pages.Administration.Users': true,
+        'Pages.Administration.Users.Create': true,
+        'Pages.Administration.Users.Edit': true,
+        'Pages.Administration.Users.Delete': true,
+        'Pages.Administration.Users.ChangePermissions': true,
+        'Pages.Administration.Invoices': true,
+        'Pages.Administration.DiscountRequests': true,
+        'Pages.Administration.Campaigns': true,
+        'Pages.Administration.License': true,
+        'Pages.Administration.Download': true,
+        'Pages.Administration.Tenant.Settings': true,
+        'Pages.Administration.Host.Settings': true,
+        'Pages.Maintenance': true,
+        'Pages.Maintenance.Cache': true,
+        'Pages.Tenants': true,
+        'Pages.Tenants.Create': true,
+        'Pages.Tenants.Edit': true,
+        'Pages.Tenants.Delete': true
+    };
+
+    abp.auth.grantedPermissions = {
+    };
+
+})();
+
+(function() {
+    abp.nav = {};
+    abp.nav.menus = {
+        'MainMenu': {
+            name: 'MainMenu',
+            displayName: '主菜单',
+            items: []
+            }
+ ,         'Frontend': {
+            name: 'Frontend',
+            displayName: 'Frontend menu',
+            items: [{
+                    name: 'Frontend.Home',
+                    order: 0,
+                    url: 'Home',
+                    displayName: 'Home page',
+                    isEnabled: true,
+                    isVisible: true,
+                    items: []
+                } , {
+                    name: 'Frontend.Demo',
+                    order: 0,
+                    url: 'Demo',
+                    displayName: 'Demo',
+                    isEnabled: true,
+                    isVisible: true,
+                    items: []
+                } , {
+                    name: 'Frontend.Prices',
+                    order: 0,
+                    url: 'Prices',
+                    displayName: 'Prices',
+                    isEnabled: true,
+                    isVisible: true,
+                    items: []
+                } , {
+                    name: 'Frontend.FAQ',
+                    order: 0,
+                    url: 'Faq',
+                    displayName: 'FAQ',
+                    isEnabled: true,
+                    isVisible: true,
+                    items: []
+                } , {
+                    name: 'Frontend.Documents',
+                    order: 0,
+                    url: 'Documents',
+                    displayName: 'Documents',
+                    isEnabled: true,
+                    isVisible: true,
+                    items: []
+                } , {
+                    name: 'Frontend.Forum',
+                    order: 0,
+                    url: 'http://forum.aspnetboilerplate.com/',
+                    displayName: 'Forum',
+                    isEnabled: true,
+                    isVisible: true,
+                    items: []
+                }]
+            }
+    };
+})();
+
+
+(function(){
+    abp.setting = abp.setting || {};
+    abp.setting.values = {
+
+        'Abp.Localization.DefaultLanguageName': null,
+        'Abp.Notifications.ReceiveNotifications': 'true',
+        'Abp.Timing.TimeZone': 'UTC',
+        'Abp.Zero.UserManagement.IsEmailConfirmationRequiredForLogin': 'false',
+        'Abp.Zero.OrganizationUnits.MaxUserMembershipCount': '2147483647',
+        'Abp.Zero.UserManagement.TwoFactorLogin.IsEnabled': 'true',
+        'Abp.Zero.UserManagement.TwoFactorLogin.IsRememberBrowserEnabled': 'true',
+        'Abp.Zero.UserManagement.TwoFactorLogin.IsEmailProviderEnabled': 'true',
+        'Abp.Zero.UserManagement.TwoFactorLogin.IsSmsProviderEnabled': 'true',
+        'Abp.Zero.UserManagement.UserLockOut.IsEnabled': 'true',
+        'Abp.Zero.UserManagement.UserLockOut.MaxFailedAccessAttemptsBeforeLockout': '5',
+        'Abp.Zero.UserManagement.UserLockOut.DefaultAccountLockoutSeconds': '300',
+        'Abp.Zero.UserManagement.PasswordComplexity.RequireDigit': 'false',
+        'Abp.Zero.UserManagement.PasswordComplexity.RequireLowercase': 'false',
+        'Abp.Zero.UserManagement.PasswordComplexity.RequireNonAlphanumeric': 'false',
+        'Abp.Zero.UserManagement.PasswordComplexity.RequireUppercase': 'false',
+        'Abp.Zero.UserManagement.PasswordComplexity.RequiredLength': '3'
+    };
+
+})();
+
+(function(){
+    abp.clock.provider = abp.timing.unspecifiedClockProvider || abp.timing.localClockProvider;
+    abp.clock.provider.supportsMultipleTimezone = false;
+})();
+
+(function(){
+    abp.security.antiForgery.tokenCookieName = 'XSRF-TOKEN';
+    abp.security.antiForgery.tokenHeaderName = 'X-XSRF-TOKEN';
+})();
+
+(function(){
+    abp.event.trigger('abp.dynamicScriptsInitialized');
+})();
